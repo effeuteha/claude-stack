@@ -68,3 +68,7 @@ Offloads work to isolated contexts, keeping your main context clean.
 ## Share Screenshots
 
 When debugging UI issues or errors, share screenshots directly. Claude is multimodal and can read them.
+
+---
+
+**Previous:** [Mysti + VSCode](10-mysti-vscode.md) | **Next:** [Anti-Patterns](12-anti-patterns.md)

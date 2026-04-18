@@ -85,3 +85,7 @@ When you use GSD for project management, it creates a `.planning/` directory:
 ```
 
 This state persists across sessions and is git-tracked, so your entire team can see the project's planning history.
+
+---
+
+**Next:** [Claude Code Internals](02-claude-code-internals.md) — understand how CLAUDE.md loading, memory, and settings work under the hood.

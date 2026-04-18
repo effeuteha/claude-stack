@@ -271,3 +271,9 @@ Before claiming completion, the `verification-before-completion` skill enforces:
 Serena: write_memory
 /sc:save
 ```
+
+---
+
+**Avoid common mistakes:** See [Anti-Patterns](12-anti-patterns.md) — especially #1 (skipping spec-panel), #9 (executing without /clear), and #14 (autonomous without review).
+
+**Previous:** [Task Routing](04-task-routing.md) | **Next:** [Quality Scaling](06-quality-scaling.md)

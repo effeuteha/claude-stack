@@ -75,3 +75,9 @@ For maximum quality on critical features:
 ```
 
 The key insight: "The more tokens you throw at a coding problem, the better the result. Using separate context windows makes results even better — this is why one agent can cause bugs and another (same model) can find them."
+
+---
+
+**See also:** [Anti-Patterns](12-anti-patterns.md) #1 (skipping spec-panel) and #14 (autonomous without review) — the two most common quality-related mistakes.
+
+**Previous:** [Workflow Phases](05-workflow-phases.md) | **Next:** [Knowledge Management](07-knowledge-management.md)

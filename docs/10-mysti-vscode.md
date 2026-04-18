@@ -35,11 +35,45 @@ Agent chaining: later agents receive earlier agents' responses.
 
 ## 16 Developer Personas
 
-Architect, Debugger, Security-Minded, Performance Tuner, Prototyper, Refactorer, Full-Stack, DevOps, Mentor, Designer, Data Engineer, ML Engineer, Mobile Dev, API Designer, Test Engineer, Tech Writer.
+| Persona | Focus |
+|---------|-------|
+| **Architect** | System design, patterns, scalability |
+| **Debugger** | Root cause analysis, systematic debugging |
+| **Security-Minded** | Vulnerabilities, threat modeling, secure coding |
+| **Performance Tuner** | Bottlenecks, profiling, optimization |
+| **Prototyper** | Rapid iteration, MVPs, proof of concepts |
+| **Refactorer** | Code quality, design patterns, clean code |
+| **Full-Stack** | End-to-end features across frontend and backend |
+| **DevOps** | CI/CD, infrastructure, deployment, monitoring |
+| **Mentor** | Teaching, code explanations, best practices |
+| **Designer** | UI/UX, accessibility, visual design |
+| **Data Engineer** | Pipelines, schemas, data modeling |
+| **ML Engineer** | Models, training, evaluation, deployment |
+| **Mobile Dev** | iOS/Android, responsive design, mobile patterns |
+| **API Designer** | REST/GraphQL, contracts, versioning |
+| **Test Engineer** | Test strategies, coverage, automation |
+| **Tech Writer** | Documentation, READMEs, API docs |
+
+Select a persona to focus Claude's approach. E.g., "Security-Minded" will prioritize vulnerability scanning and input validation over feature speed.
 
 ## 12 Toggleable Skills
 
-Concise, Test-Driven, Auto-Commit, First Principles, Scope Discipline, Documentation, Accessibility, Performance, Security, Error Handling, Code Review, Incremental.
+| Skill | Effect When Enabled |
+|-------|-------------------|
+| **Concise** | Shorter responses, less explanation |
+| **Test-Driven** | Write tests before implementation |
+| **Auto-Commit** | Commit after each successful change |
+| **First Principles** | Reason from fundamentals, question assumptions |
+| **Scope Discipline** | Stay focused, resist scope creep |
+| **Documentation** | Generate docs alongside code |
+| **Accessibility** | Prioritize a11y in UI code |
+| **Performance** | Optimize for speed and efficiency |
+| **Security** | Security-first coding practices |
+| **Error Handling** | Robust error handling and edge cases |
+| **Code Review** | Self-review before presenting changes |
+| **Incremental** | Small, reviewable changes instead of large rewrites |
+
+Toggle skills on/off to shape Claude's behavior within Mysti. Multiple skills can be active simultaneously.
 
 ## Autonomous Mode — 3 Safety Levels
 
@@ -88,6 +122,10 @@ Claude Code, Copilot CLI, Gemini, Codex, Cline, Cursor, OpenClaw, OpenCode, Qwen
 3. Focus on API endpoints or auth flow
 4. Feed findings into /sc:analyze --focus security
 ```
+
+---
+
+**Previous:** [Session Management](09-session-management.md) | **Next:** [Prompting Patterns](11-prompting-patterns.md)
 
 ### Architecture Decisions (Phase 3)
 ```

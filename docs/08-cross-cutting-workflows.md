@@ -103,3 +103,7 @@ superpowers:subagent-driven-development    # For executing plans with parallel t
 /gsd:health                               # Diagnose .planning/ directory issues
 /gsd:stats                                # Project statistics (phases, git metrics, timeline)
 ```
+
+---
+
+**Previous:** [Knowledge Management](07-knowledge-management.md) | **Next:** [Session Management](09-session-management.md)

@@ -69,3 +69,7 @@ Tasks persist at `~/.claude/tasks/`. Share across sessions:
 ```bash
 CLAUDE_CODE_TASK_LIST_ID=my-project-tasks claude
 ```
+
+---
+
+**Previous:** [Cross-Cutting Workflows](08-cross-cutting-workflows.md) | **Next:** [Mysti + VSCode](10-mysti-vscode.md)

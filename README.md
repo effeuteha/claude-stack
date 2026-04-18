@@ -124,7 +124,7 @@ Need to SET UP automations?            -> claude-code-setup
 |-------|-------------------|
 | [Tool Responsibility Matrix](reference/tool-matrix.md) | Primary vs secondary tool for every need |
 | [Quick Reference](reference/quick-reference.md) | Golden path, autonomous path, SC flags, decision tree |
-| [Tool Inventory](reference/tool-inventory.md) | Complete catalog: ~37 GSD + ~30 SC + 14 Superpowers + 7 plugins + 5 native + 4 MCP |
+| [Tool Inventory](reference/tool-inventory.md) | Complete catalog: ~38 GSD + ~30 SC + 14 Superpowers + 6 plugins + 5 native + 4 MCP |
 | [Prompting Patterns](docs/11-prompting-patterns.md) | Effective prompting techniques from Claude Code's creator and power users |
 | [Anti-Patterns](docs/12-anti-patterns.md) | 22 mistakes to avoid and what to do instead |
 
@@ -136,6 +136,7 @@ Need to SET UP automations?            -> claude-code-setup
 | [settings.local.json](examples/settings.local.json) | Personal settings template (gitignored) |
 | [mcp.json](examples/mcp.json) | Recommended MCP server configuration |
 | [CLAUDE.md](examples/claude-md/CLAUDE.md) | Annotated root CLAUDE.md template |
+| [CLAUDE.example.md](examples/claude-md/CLAUDE.example.md) | Filled-in example (see what a good CLAUDE.md looks like) |
 | [rules/](examples/rules/) | Example `.claude/rules/` modular rule files |
 | [hooks/](examples/hooks/) | PostToolUse auto-format and lint hooks |
 | [commands/](examples/commands/) | Example custom slash commands |
@@ -155,10 +156,10 @@ Need to SET UP automations?            -> claude-code-setup
 
 | Component | Commands/Skills | Status |
 |-----------|----------------|--------|
-| GSD | ~37 commands | Required |
+| GSD | ~38 commands | Required |
 | SuperClaude | ~30 commands | Required |
 | Superpowers | 14 skills (+3 aliases) | Required |
-| Plugins | 7 plugins | Required |
+| Plugins | 6 plugins | Required |
 | Claude Code Native | 5 skills | Built-in |
 | MCP Servers | 4 servers | Required (2) / Optional (2) |
 | Mysti | 12 providers, 16 personas, 12 skills | Optional |

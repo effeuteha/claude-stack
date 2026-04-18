@@ -1,6 +1,6 @@
 # Complete Tool Inventory
 
-## GSD Commands (~37)
+## GSD Commands (~38)
 
 | Command | Purpose |
 |---------|---------|
@@ -99,7 +99,7 @@
 
 Deprecated: `brainstorm` -> `brainstorming`, `execute-plan` -> `executing-plans`, `write-plan` -> `writing-plans`
 
-## Plugins (7)
+## Plugins (6)
 
 | Plugin | Purpose |
 |--------|---------|

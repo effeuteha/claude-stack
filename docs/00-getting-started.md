@@ -255,3 +255,11 @@ git clone https://github.com/effeuteha/claude-stack.git
 cd claude-stack
 bash setup.sh
 ```
+
+---
+
+## See Also
+
+- [Troubleshooting](troubleshooting.md) — common problems and how to fix them
+- [Anti-Patterns](12-anti-patterns.md) — 22 mistakes to avoid
+- [Walkthrough: API Feature](walkthrough-api-feature.md) — see the full workflow in action

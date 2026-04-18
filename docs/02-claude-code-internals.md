@@ -180,3 +180,7 @@ Reduce permission fatigue by pre-approving common operations in `.claude/setting
 ```
 
 Share these with your team by committing `.claude/settings.json`. Use `.claude/settings.local.json` for personal overrides.
+
+---
+
+**Previous:** [Architecture Overview](01-architecture.md) | **Next:** [Context Discipline](03-context-discipline.md)

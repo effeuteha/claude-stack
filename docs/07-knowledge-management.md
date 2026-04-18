@@ -59,3 +59,7 @@ Serena: read_memory "auth-architecture"   # Recall in future session
 - Domain-specific knowledge that would be expensive to re-discover
 - Integration quirks or gotchas
 - "This is NOT documented anywhere but it matters"
+
+---
+
+**Previous:** [Quality Scaling](06-quality-scaling.md) | **Next:** [Cross-Cutting Workflows](08-cross-cutting-workflows.md)

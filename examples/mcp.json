@@ -7,6 +7,11 @@
     "sequential-thinking": {
       "command": "npx",
       "args": ["-y", "@anthropic/sequential-thinking-mcp"]
+    },
+    "serena": {
+      "command": "uvx",
+      "args": ["serena"],
+      "_comment": "Serena MCP — semantic code intelligence. Requires Python/uvx. See https://github.com/oraios/serena for full setup including project configuration."
     }
   }
 }

@@ -91,3 +91,7 @@ Match AI quality to task criticality:
 | Research a library | Context7 `query-docs` |
 | Research a domain | `/sc:research "query"` |
 | I don't know which command | `/gsd:do "description"` or `/sc:recommend` |
+
+---
+
+**Previous:** [Context Discipline](03-context-discipline.md) | **Next:** [Workflow Phases](05-workflow-phases.md)

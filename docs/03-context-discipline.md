@@ -110,3 +110,7 @@ START SESSION
 | Arguing with Claude when it's confused | Burns tokens in polluted context | `Esc Esc`, re-prompt cleanly |
 | Reading entire files when you need one function | Wastes context on irrelevant code | Use Serena `find_symbol` |
 | Not using `/sc:index-repo` | 58K tokens per session for codebase orientation | Index once, read 3K per session |
+
+---
+
+**Previous:** [Claude Code Internals](02-claude-code-internals.md) | **Next:** [Task Routing](04-task-routing.md)

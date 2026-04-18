@@ -26,3 +26,9 @@
 | 20 | One massive CLAUDE.md file | Hard to maintain, exceeds effective line limits | Split into `.claude/rules/*.md` modules |
 | 21 | Not committing permissions to settings.json | Every team member re-approves the same tools | Share permission wildcards via `.claude/settings.json` |
 | 22 | Arguing with Claude in degraded context | Wasted tokens in a polluted context | `Esc Esc` or `/rewind`, then re-prompt cleanly |
+
+---
+
+**Having one of these problems?** See [Troubleshooting](troubleshooting.md) for step-by-step fixes.
+
+**Previous:** [Prompting Patterns](11-prompting-patterns.md)
