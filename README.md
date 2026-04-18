@@ -23,12 +23,12 @@
 | Component | Install | Purpose |
 |-----------|---------|---------|
 | **Claude Code** | `npm install -g @anthropic-ai/claude-code` | Core AI agent CLI |
-| **GSD** | [Installation guide](https://github.com/cyanheads/gsd) | Project lifecycle management |
+| **GSD** | [Installation guide](https://github.com/gsd-build/get-shit-done) | Project lifecycle management |
 | **SuperClaude** | [Installation guide](https://github.com/NomenAK/SuperClaude) | Strategic thinking skills |
-| **Serena MCP** | [Configure in MCP settings](https://github.com/getsurya/serena) | Semantic code intelligence |
+| **Serena MCP** | [Configure in MCP settings](https://github.com/oraios/serena) | Semantic code intelligence |
 | **Context7 MCP** | [Configure in MCP settings](https://github.com/upstash/context7) | Library documentation |
 
-Optional: [Mysti](https://github.com/DeepMyst/Mysti) (VSCode), [Playwright MCP](https://github.com/anthropics/anthropic-mcp-playwright), [Sequential Thinking MCP](https://github.com/anthropics/anthropic-mcp-sequential-thinking), [nWave](https://github.com/nWave-ai/nWave) (SDLC methodology)
+Optional: [Mysti](https://github.com/DeepMyst/Mysti) (VSCode), [Playwright MCP](https://github.com/microsoft/playwright-mcp), [Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking), [nWave](https://github.com/nWave-ai/nWave) (SDLC methodology)
 
 ### 2. Copy the Example Config
 
@@ -168,12 +168,12 @@ This guide synthesizes patterns from:
 | Resource | What It Covers |
 |----------|----------------|
 | [claude-code-best-practice](https://github.com/shanraisshan/claude-code-best-practice) | Comprehensive Claude Code tips, settings, hooks, memory patterns |
-| [GSD](https://github.com/cyanheads/gsd) | Project lifecycle management for Claude Code |
+| [GSD](https://github.com/gsd-build/get-shit-done) | Project lifecycle management for Claude Code |
 | [SuperClaude](https://github.com/NomenAK/SuperClaude) | Strategic thinking and analysis skills |
-| [Superpowers](https://github.com/NomenAK/superpowers) | Discipline-enforcing workflow skills |
+| [Superpowers](https://github.com/obra/superpowers) | Discipline-enforcing workflow skills |
 | [Mysti](https://github.com/DeepMyst/Mysti) | Multi-agent VSCode orchestrator |
 | [nWave](https://github.com/nWave-ai/nWave) | Structured SDLC methodology with TDD enforcement |
-| [Serena](https://github.com/getsurya/serena) | Semantic code intelligence MCP server |
+| [Serena](https://github.com/oraios/serena) | Semantic code intelligence MCP server |
 | [Context7](https://github.com/upstash/context7) | Library documentation MCP server |
 
 ---

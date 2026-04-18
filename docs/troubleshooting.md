@@ -225,4 +225,4 @@ Or use the routing commands:
 
 1. Check the [Anti-Patterns](12-anti-patterns.md) — you might be hitting a known mistake
 2. Check the [Decision Tree](../cheatsheets/decision-tree.md) — find the right tool for your task
-3. Open a [GitHub Discussion](https://github.com/effeuteha/claude-stack/discussions) — ask the community
+3. Open a [GitHub Issue](https://github.com/effeuteha/claude-stack/issues) — ask the community

@@ -13,7 +13,7 @@ Best for: Solo developers, small projects, getting started with AI-assisted deve
 | Tool | Purpose | Install |
 |------|---------|---------|
 | **Claude Code** | Core AI agent | `npm install -g @anthropic-ai/claude-code` |
-| **GSD** | Project lifecycle | [github.com/cyanheads/gsd](https://github.com/cyanheads/gsd) |
+| **GSD** | Project lifecycle | [github.com/gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) |
 | **Context7 MCP** | Library docs | Add to `.mcp.json` (see below) |
 
 ### Setup
@@ -23,7 +23,7 @@ Best for: Solo developers, small projects, getting started with AI-assisted deve
 npm install -g @anthropic-ai/claude-code
 
 # 2. Install GSD (follow repo instructions)
-# https://github.com/cyanheads/gsd
+# https://github.com/gsd-build/get-shit-done
 
 # 3. Create MCP config
 cat > .mcp.json << 'EOF'
@@ -72,7 +72,7 @@ Everything in Minimal, plus:
 | Tool | Purpose | Install |
 |------|---------|---------|
 | **SuperClaude** | Strategic thinking | [github.com/NomenAK/SuperClaude](https://github.com/NomenAK/SuperClaude) |
-| **Serena MCP** | Code intelligence | [github.com/getsurya/serena](https://github.com/getsurya/serena) |
+| **Serena MCP** | Code intelligence | [github.com/oraios/serena](https://github.com/oraios/serena) |
 | **Sequential Thinking MCP** | Complex reasoning | Add to `.mcp.json` |
 
 ### Additional Setup
@@ -82,10 +82,10 @@ Everything in Minimal, plus:
 # https://github.com/NomenAK/SuperClaude
 
 # 2. Install Superpowers (follow repo instructions)
-# https://github.com/NomenAK/superpowers
+# https://github.com/obra/superpowers
 
 # 3. Configure Serena MCP (follow repo instructions)
-# https://github.com/getsurya/serena
+# https://github.com/oraios/serena
 
 # 4. Update .mcp.json
 cat > .mcp.json << 'EOF'
@@ -148,7 +148,7 @@ Everything in Standard, plus:
 |------|---------|---------|
 | **Mysti** (VSCode) | Multi-agent GUI | `ext install DeepMyst.mysti` |
 | **Playwright MCP** | Browser testing | Add to `.mcp.json` |
-| **Superpowers** | Workflow discipline | [github.com/NomenAK/superpowers](https://github.com/NomenAK/superpowers) |
+| **Superpowers** | Workflow discipline | [github.com/obra/superpowers](https://github.com/obra/superpowers) |
 | **nWave** (optional) | SDLC methodology | `/plugin marketplace add nwave-ai/nwave` |
 | **HuggingFace** (optional) | ML ops | Follow HF Skills instructions |
 
@@ -192,7 +192,7 @@ Best for: Developers who prefer GUI over CLI, teams using VSCode as primary IDE.
 |------|---------|---------|
 | **Mysti** | Primary interface | `ext install DeepMyst.mysti` |
 | **Claude Code** | Backend (spawned by Mysti) | `npm install -g @anthropic-ai/claude-code` |
-| **GSD** | Lifecycle (via Claude Code) | [github.com/cyanheads/gsd](https://github.com/cyanheads/gsd) |
+| **GSD** | Lifecycle (via Claude Code) | [github.com/gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) |
 | **Context7 MCP** | Library docs | Add to `.mcp.json` |
 | **Serena MCP** | Code intelligence | Configure in MCP settings |
 

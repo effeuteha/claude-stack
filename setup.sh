@@ -303,13 +303,13 @@ if [ "$CLAUDE_OK" = false ]; then
 fi
 
 if [ "$GSD_OK" = false ]; then
-    echo -e "  ${YELLOW}2.${NC} Install GSD: ${CYAN}https://github.com/cyanheads/gsd${NC}"
+    echo -e "  ${YELLOW}2.${NC} Install GSD: ${CYAN}https://github.com/gsd-build/get-shit-done${NC}"
 fi
 
 if [ "$PROFILE_NAME" = "standard" ] || [ "$PROFILE_NAME" = "full" ]; then
     echo -e "  ${YELLOW}3.${NC} Install SuperClaude: ${CYAN}https://github.com/NomenAK/SuperClaude${NC}"
-    echo -e "  ${YELLOW}4.${NC} Install Superpowers: ${CYAN}https://github.com/NomenAK/superpowers${NC}"
-    echo -e "  ${YELLOW}5.${NC} Configure Serena: ${CYAN}https://github.com/getsurya/serena${NC}"
+    echo -e "  ${YELLOW}4.${NC} Install Superpowers: ${CYAN}https://github.com/obra/superpowers${NC}"
+    echo -e "  ${YELLOW}5.${NC} Configure Serena: ${CYAN}https://github.com/oraios/serena${NC}"
 fi
 
 if [ "$PROFILE_NAME" = "full" ]; then
