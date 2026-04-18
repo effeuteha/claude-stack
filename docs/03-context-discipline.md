@@ -1,6 +1,6 @@
 # Context Discipline
 
-Context management is the difference between Claude producing great output and producing garbage. Your context window is a finite resource — treat it like memory in a constrained system.
+Context management is the difference between Claude producing great output and producing garbage. Your context window is ~200K tokens. When conversation history exceeds ~70% of that, Claude starts deprioritizing earlier instructions and output quality degrades silently.
 
 ## The Context Budget
 
@@ -36,7 +36,7 @@ Context management is the difference between Claude producing great output and p
 
 ### Use Subagents to Offload Work
 
-Say "use subagents" to delegate research/analysis to isolated contexts, keeping your main context clean. Each subagent gets its own context window.
+Say "use subagents for [task]" to delegate research/analysis to isolated contexts. Each subagent gets its own context window and reports results back. Use `/sc:pm` to coordinate multiple subagents. This keeps your main context clean for the work that matters.
 
 ### Use `/sc:index-repo` for Orientation
 

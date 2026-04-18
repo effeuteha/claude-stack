@@ -1,12 +1,23 @@
 # Workflow Phases (0-7)
 
-The complete phase lifecycle from session bootstrap to milestone completion.
+The complete phase lifecycle from session bootstrap to milestone completion. For the short version, see [Quick Reference](../reference/quick-reference.md).
+
+**Prerequisites:** Read [Architecture Overview](01-architecture.md) to understand how the tools connect.
+
+---
 
 ## Phase 0: Session Bootstrap
 
 **Goal**: Restore full context in minimal tokens.
 
-### New Session on Existing Project
+**Which bootstrap do I need?**
+```
+Existing project, returning?       -> Resume flow (restore state)
+Brand new project?                 -> Init flow (map + index)
+Context window getting full?       -> Pressure flow (save + clear + resume)
+```
+
+### Resume Flow (Existing Project)
 ```
 1. /sc:load                         # Restore SC session context via Serena
 2. /gsd:resume-work                 # Restore GSD state from STATE.md
@@ -15,14 +26,14 @@ The complete phase lifecycle from session bootstrap to milestone completion.
 5. /gsd:progress                    # See where you are, route to next action
 ```
 
-### Brand New Session (First Time)
+### Init Flow (Brand New Project)
 ```
 1. /gsd:map-codebase                # If brownfield (existing code)
-2. /sc:index-repo                   # Create PROJECT_INDEX.md for token efficiency
+2. /sc:index-repo                   # Create PROJECT_INDEX.md (3K tokens vs 58K)
 3. Proceed to Phase 1               # Strategic thinking
 ```
 
-### Context Pressure Mid-Session
+### Pressure Flow (Context Getting Full)
 ```
 1. /gsd:pause-work                  # Snapshot state to .continue-here
 2. /sc:save                         # Persist SC session via Serena
@@ -30,6 +41,8 @@ The complete phase lifecycle from session bootstrap to milestone completion.
 4. /clear                           # Free context
 5. /gsd:resume-work                 # Restore in fresh context
 ```
+
+See [Context Discipline](03-context-discipline.md) for details on managing context pressure.
 
 ---
 
@@ -42,10 +55,10 @@ The complete phase lifecycle from session bootstrap to milestone completion.
 /sc:brainstorm
 ```
 - Socratic dialogue exploring intent, constraints, success criteria
-- Produces a design doc at `docs/plans/YYYY-MM-DD-<topic>-design.md`
+- Produces a design doc at `docs/plans/YYYY-MM-DD-<topic>-design.md` — Claude reads this automatically in later phases
 - Automatically invokes `writing-plans` skill when done
-- **HARD GATE**: No implementation until design approved
-- **VSCode alternative**: Use Mysti Brainstorm with Debate or Perspectives strategy
+- **HARD GATE**: No implementation until design approved. Edit the design doc if assumptions change before proceeding.
+- **VSCode alternative**: Use Mysti Brainstorm with Debate or Perspectives strategy for multi-model input
 
 ### Step 1.2: Business Analysis (if applicable)
 ```
@@ -128,6 +141,11 @@ Context7: resolve-library-id -> query-docs    # Library-specific
 /sc:research --c7 "specific technical query"  # Combined web + docs
 ```
 
+**When to use which:**
+- **Ecosystem research** (`/gsd:research-phase`): "What are the best practices for real-time WebSocket auth in 2026?"
+- **Library-specific** (Context7): "How do I configure SQLAlchemy JSONB column merge?"
+- **Both** (`/sc:research --c7`): combines web research with Context7 library docs in one query
+
 ### Step 4.4: Plan the Phase
 ```
 /gsd:plan-phase N
@@ -165,14 +183,14 @@ Runs all remaining phases hands-free: discuss -> plan -> execute per phase.
 
 ### Step 5.2: During Execution — Tool Usage
 
-| Tool | When | Example |
-|------|------|---------|
-| **Serena `find_symbol`** | Understand existing code | Finding a class's methods |
-| **Serena `replace_symbol_body`** | Replace entire functions | Rewriting a handler |
-| **Serena `find_referencing_symbols`** | Check dependencies | Before modifying a public API |
-| **Serena `search_for_pattern`** | Find patterns across codebase | All files using a deprecated function |
-| **Context7 `query-docs`** | Need API docs while coding | Middleware error handling patterns |
-| **Sequential Thinking** | Complex multi-step logic | Designing a state machine |
+| Tool | Use When | Example |
+|------|----------|---------|
+| **Serena `find_symbol`** | You know the symbol name but not which file it's in | `find_symbol("UserService")` to locate the class before extending it |
+| **Serena `replace_symbol_body`** | You need to rewrite an entire function/method | Replace a route handler with new implementation |
+| **Serena `find_referencing_symbols`** | You're changing a public API and need to know what breaks | Check all callers of `authenticate()` before modifying its signature |
+| **Serena `search_for_pattern`** | You need text-based search (regex) across the codebase | Find all files using `@deprecated` or a specific import |
+| **Context7 `query-docs`** | You need up-to-date library docs, not Claude's training data | "How does SQLAlchemy handle JSONB merge?" |
+| **Sequential Thinking** | The logic is complex enough to need step-by-step reasoning | Designing a state machine, debugging race conditions |
 
 ### Step 5.3: Ad-Hoc Implementation
 ```
@@ -260,10 +278,10 @@ Before claiming completion, the `verification-before-completion` skill enforces:
 
 ### Step 7.3: Complete
 ```
-/gsd:complete-milestone 1.0.0
-/sc:git
-/claude-md-management:revise-claude-md
-/gsd:cleanup
+/gsd:complete-milestone 1.0.0            # Archive + git tag
+/sc:git                                   # Push tags, clean git state
+/claude-md-management:revise-claude-md    # Update CLAUDE.md with session learnings
+/gsd:cleanup                             # Archive .planning/phases/ directories from completed work
 ```
 
 ### Step 7.4: Knowledge Persistence

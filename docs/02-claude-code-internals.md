@@ -92,6 +92,13 @@ Introduced in Claude Code v2.1.33. The first 200 lines of an agent's `MEMORY.md`
 
 **Critical:** `deny` rules have the highest safety precedence and cannot be overridden by lower-priority `allow`/`ask` rules.
 
+**Example conflict resolution:**
+```
+Global settings.json:      allow: ["Bash(rm *.log)"]
+Project settings.json:     deny:  ["Bash(rm *)"]
+Result:                    DENIED — deny always wins, regardless of priority level
+```
+
 See [examples/settings.json](../examples/settings.json) for a team-ready configuration.
 
 ## Command vs Skill vs Subagent

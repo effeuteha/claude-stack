@@ -198,7 +198,21 @@ Clean commit with descriptive message. On to Phase 4.
 
 ---
 
-## What Made This Better Than "Just Asking Claude"
+## What If Something Goes Wrong?
+
+| Problem | Recovery |
+|---------|----------|
+| **Execution fails mid-phase** | Fix the issue, then re-run `/gsd:execute-phase N` — it picks up where it left off |
+| **Tests fail after execution** | Run `/gsd:debug "test failure description"` for persistent debugging, or fix manually and re-run `/gsd:verify-work N` |
+| **Spec-panel found major issues** | Update the plan: re-run `/gsd:plan-phase N` with the feedback, then execute again |
+| **Context got bloated** | `/gsd:pause-work` -> `/clear` -> `/gsd:resume-work` — resume with clean context |
+| **Wrong approach entirely** | `/gsd:discuss-phase N` again with updated vision, then re-plan from scratch |
+
+The workflow is **not a one-way conveyor belt**. You can loop back to any earlier phase at any time. The `.planning/` state tracks where you are.
+
+---
+
+## Why This Approach Scales Better
 
 | Without the Stack | With the Stack |
 |-------------------|---------------|
