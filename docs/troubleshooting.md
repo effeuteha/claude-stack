@@ -224,5 +224,5 @@ Or use the routing commands:
 ## Still Stuck?
 
 1. Check the [Anti-Patterns](12-anti-patterns.md) — you might be hitting a known mistake
-2. Check the [Decision Tree](../cheatsheets/decision-tree.md) — find the right tool for your task
+2. Check the [Task Routing](04-task-routing.md) — find the right tool for your task
 3. Open a [GitHub Issue](https://github.com/effeuteha/claude-stack/issues) — ask the community

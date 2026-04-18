@@ -135,8 +135,7 @@ Need to SET UP automations?            -> claude-code-setup
 | [settings.json](examples/settings.json) | Team-ready Claude Code settings with permission wildcards |
 | [settings.local.json](examples/settings.local.json) | Personal settings template (gitignored) |
 | [mcp.json](examples/mcp.json) | Recommended MCP server configuration |
-| [CLAUDE.md](examples/claude-md/CLAUDE.md) | Annotated root CLAUDE.md template |
-| [CLAUDE.example.md](examples/claude-md/CLAUDE.example.md) | Filled-in example (see what a good CLAUDE.md looks like) |
+| [CLAUDE.md](examples/claude-md/CLAUDE.md) | Annotated template with filled-in example |
 | [rules/](examples/rules/) | Example `.claude/rules/` modular rule files |
 | [hooks/](examples/hooks/) | PostToolUse auto-format and lint hooks |
 | [commands/](examples/commands/) | Example custom slash commands |
@@ -145,10 +144,7 @@ Need to SET UP automations?            -> claude-code-setup
 
 | File | Purpose |
 |------|---------|
-| [One-Page Reference](cheatsheets/one-page.md) | Printable single-page cheat sheet |
-| [Decision Tree](cheatsheets/decision-tree.md) | Visual "which tool?" flowchart |
 | [SC Flags](cheatsheets/sc-flags.md) | SuperClaude flags quick reference |
-| [GSD Commands](cheatsheets/gsd-commands.md) | GSD commands quick reference |
 
 ---
 
