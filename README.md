@@ -8,37 +8,9 @@
 >
 > **This guide is the missing manual.**
 
----
-
-## The Stack
-
-```
-+--------------+  +--------------+  +-------------------------------+
-|  STRATEGIC   |  |  LIFECYCLE   |  |      CODE INTELLIGENCE        |
-|   (SC)       |  |   (GSD)      |  |    (Serena + Context7)        |
-|              |  |              |  |                               |
-| brainstorm   |  | new-project  |  | Serena: symbol navigation,   |
-| research     |  | plan-phase   |  |   refactoring, memories       |
-| design       |  | execute-     |  |                               |
-| analyze      |  |   phase      |  | Context7: library docs,       |
-| test         |  | verify-work  |  |   code examples               |
-| implement    |  | debug        |  |                               |
-| spec-panel   |  | autonomous   |  | Sequential Thinking:          |
-| ...30 cmds   |  | ...37 cmds   |  |   multi-step reasoning        |
-+--------------+  +--------------+  +-------------------------------+
-
-+--------------+  +--------------+  +-------------------------------+
-|   PLUGINS    |  | SUPERPOWERS  |  |   VSCODE (Mysti)              |
-|              |  |              |  |                               |
-| feature-dev  |  | brainstorming|  | Multi-agent brainstorm        |
-| code-review  |  | TDD          |  | @-mention routing (12 models) |
-| frontend-    |  | debugging    |  | 16 developer personas         |
-|   design     |  | verification |  | Autonomous mode               |
-| ralph-loop   |  | code-review  |  | Context compaction            |
-| claude-md    |  | worktrees    |  |                               |
-| claude-code  |  | ...14 skills |  |                               |
-+--------------+  +--------------+  +-------------------------------+
-```
+<p align="center">
+  <img src="assets/architecture.svg" alt="Claude Stack Architecture" width="100%">
+</p>
 
 **Philosophy**: GSD is the spine (lifecycle + state). SC is the brain (thinking + analysis). Serena is the hands (code navigation + editing). Context7 is the library (live docs). Playwright is the eyes (browser testing). Mysti is the bridge (VSCode multi-agent orchestration).
 
@@ -81,7 +53,9 @@ cp examples/claude-md/CLAUDE.md CLAUDE.md
 
 ### 4. Start Building
 
-Read the [full workflow guide](docs/05-workflow-phases.md) or use the [decision tree](#which-tool-should-i-use) below.
+Read the [full workflow guide](docs/05-workflow-phases.md), follow the [walkthrough](docs/walkthrough-api-feature.md), or use the [decision tree](#which-tool-should-i-use) below.
+
+> **New here?** Start with the [Stack Profiles](docs/00-getting-started.md) to pick the right level of tooling for you — from 3-tool minimal to 10+ tool full stack.
 
 ---
 
@@ -110,6 +84,14 @@ Need to SET UP automations?            -> claude-code-setup
 ---
 
 ## Documentation
+
+### Start Here
+
+| Guide | What You'll Learn |
+|-------|-------------------|
+| [**Getting Started — Stack Profiles**](docs/00-getting-started.md) | Pick your profile (Minimal/Standard/Full/VSCode-First) and set up in 10 minutes |
+| [**Walkthrough: API Feature End-to-End**](docs/walkthrough-api-feature.md) | See the full workflow in action on a real feature (~35 min, start to finish) |
+| [**Troubleshooting**](docs/troubleshooting.md) | Common problems and how to fix them |
 
 ### Foundations
 
