@@ -1,0 +1,106 @@
+# VSCode Workflow with Mysti
+
+> **Install**: `ext install DeepMyst.mysti` or search "Mysti" in VSCode Extensions
+> **Activate**: `Ctrl+Shift+M` or click the Mysti icon in the sidebar
+> **Repo**: https://github.com/DeepMyst/Mysti
+
+## What Mysti Does
+
+Mysti is a **multi-agent orchestrator** for VSCode that wraps 12 AI coding CLIs (Claude Code is the default/primary) and lets them collaborate within VSCode's GUI. It does NOT replace your CLI workflow — it provides a visual alternative with unique multi-agent capabilities.
+
+When Mysti spawns Claude Code, it inherits your full setup — CLAUDE.md, MCP servers, GSD state, SC skills. You lose nothing by switching to the GUI.
+
+## Brainstorm Mode — 5 Strategies
+
+| Strategy | Roles | Best For |
+|----------|-------|----------|
+| **Quick** | Independent parallel analysis | Simple tasks, fast answers |
+| **Debate** | Critic vs. Defender | Architecture decisions |
+| **Red-Team** | Proposer vs. Challenger | Security reviews, robustness |
+| **Perspectives** | Risk Analyst vs. Innovator | New designs, long-term planning |
+| **Delphi** | Facilitator vs. Refiner (iterative) | Complex problems needing convergence |
+
+Example: Pair `@claude` (Defender) + `@gemini` (Critic) in Debate mode for architecture review.
+
+## @-Mention Agent Routing
+
+```
+@claude fix the authentication bug         # Routes to Claude Code
+@gemini review the API design              # Routes to Gemini
+@codex optimize this function              # Routes to Codex
+@filename                                  # References file for context injection
+```
+
+Agent chaining: later agents receive earlier agents' responses.
+
+## 16 Developer Personas
+
+Architect, Debugger, Security-Minded, Performance Tuner, Prototyper, Refactorer, Full-Stack, DevOps, Mentor, Designer, Data Engineer, ML Engineer, Mobile Dev, API Designer, Test Engineer, Tech Writer.
+
+## 12 Toggleable Skills
+
+Concise, Test-Driven, Auto-Commit, First Principles, Scope Discipline, Documentation, Accessibility, Performance, Security, Error Handling, Code Review, Incremental.
+
+## Autonomous Mode — 3 Safety Levels
+
+| Level | Auto-Approves | Blocks |
+|-------|--------------|--------|
+| **Conservative** | Read-only ops | Everything else |
+| **Balanced** (default) | Common dev ops | Destructive actions |
+| **Aggressive** | Almost everything | File deletion, force push, sudo |
+
+## Context Compaction
+
+Automatic at 75% token threshold. Uses Claude's native `/compact` or client-side summarization for other providers.
+
+## Supported Providers (12)
+
+Claude Code, Copilot CLI, Gemini, Codex, Cline, Cursor, OpenClaw, OpenCode, Qwen Code, Ollama, LocalAI, Manus.
+
+## When to Use Mysti vs. Terminal
+
+| Scenario | Use Mysti | Use Terminal |
+|----------|-----------|-------------|
+| Multi-model brainstorm / debate | Yes | No |
+| Want GUI with file/code context | Yes | — |
+| Deep GSD lifecycle management | — | Yes |
+| Headless / SSH / CI | — | Yes |
+| Quick ad-hoc with @-mentions | Yes | — |
+| Complex multi-phase execution | — | Yes (GSD shines here) |
+| Security red-teaming with two models | Yes | No |
+| Session that must persist across /clear | — | Yes (GSD state) |
+
+## Recommended Integration Patterns
+
+### Brainstorming (Phase 1, Step 4.1)
+```
+1. Open Mysti (Ctrl+Shift+M)
+2. Select Brainstorm -> Debate strategy
+3. @claude + @gemini (or @codex)
+4. Paste your phase context
+5. Let agents debate, then feed consensus into /gsd:discuss-phase
+```
+
+### Security Reviews (Phase 6)
+```
+1. Mysti Brainstorm -> Red-Team
+2. @claude (Proposer) + @gemini (Challenger)
+3. Focus on API endpoints or auth flow
+4. Feed findings into /sc:analyze --focus security
+```
+
+### Architecture Decisions (Phase 3)
+```
+1. Mysti Brainstorm -> Perspectives
+2. @claude (Risk Analyst) + @codex (Innovator)
+3. Evaluate tradeoffs
+4. Feed into /gsd:new-milestone scope
+```
+
+### Code Review (Phase 6)
+```
+1. Mysti Brainstorm -> Quick
+2. @claude + @gemini
+3. Both review the same diff independently
+4. Merge insights into PR feedback
+```

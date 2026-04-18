@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker *)",
+      "Bash(docker-compose *)"
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_EFFORT_LEVEL": "high"
+  }
+}
