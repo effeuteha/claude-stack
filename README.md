@@ -30,10 +30,15 @@
 
 Optional: [Mysti](https://github.com/DeepMyst/Mysti) (VSCode), [Playwright MCP](https://github.com/microsoft/playwright-mcp), [Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking), [nWave](https://github.com/nWave-ai/nWave) (SDLC methodology)
 
-### 2. Copy the Example Config
+### 2. Run the Setup Wizard
 
 ```bash
-# Copy recommended settings to your project
+# Interactive setup — detects installed tools, picks a profile, copies configs
+bash <(curl -fsSL https://raw.githubusercontent.com/effeuteha/claude-stack/main/setup.sh)
+```
+
+Or manually copy configs:
+```bash
 cp examples/settings.json .claude/settings.json
 cp examples/mcp.json .mcp.json
 cp examples/claude-md/CLAUDE.md CLAUDE.md
