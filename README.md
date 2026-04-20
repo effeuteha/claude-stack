@@ -131,20 +131,20 @@ Debug a complex bug                    -> /gsd:debug "description"
 | # | Guide | What You'll Learn |
 |---|-------|-------------------|
 | 1 | [Architecture Overview](docs/01-architecture.md) | How the tools connect and data flows between them |
-| 2 | [Claude Code Internals](docs/02-claude-code-internals.md) | CLAUDE.md loading, 4 memory systems, settings, hooks, commands vs skills vs agents |
-| 3 | [Context Discipline](docs/03-context-discipline.md) | Token management — when to compact, clear, and use subagents |
-| 4 | [Task Routing](docs/04-task-routing.md) | Different workflows for features, bugs, refactors + rigor scaling |
+| 2 | [Claude Code Internals](docs/03-claude-code-internals.md) | CLAUDE.md loading, 4 memory systems, settings, hooks, commands vs skills vs agents |
+| 3 | [Context Discipline](docs/04-context-discipline.md) | Token management — when to compact, clear, and use subagents |
+| 4 | [Task Routing](docs/05-task-routing.md) | Different workflows for features, bugs, refactors + rigor scaling |
 
 ### The Workflow
 
 | # | Guide | What You'll Learn |
 |---|-------|-------------------|
-| 5 | [Workflow Phases (0-7)](docs/05-workflow-phases.md) | The complete phase lifecycle from bootstrap to milestone completion |
-| 6 | [Quality Scaling](docs/06-quality-scaling.md) | Reviewer pattern, git hotspots, mutation testing, cross-model review |
-| 7 | [Knowledge Management](docs/07-knowledge-management.md) | Codebase mapping, indexing, Serena memories |
-| 8 | [Cross-Cutting Workflows](docs/08-cross-cutting-workflows.md) | Debugging, ideas, UI dev, ML, parallelization |
-| 9 | [Session Management](docs/09-session-management.md) | Start, pause, resume, parallel development |
-| 10 | [Mysti + VSCode](docs/10-mysti-vscode.md) | Multi-agent brainstorm, personas, when to use GUI vs CLI |
+| 5 | [Workflow Phases (0-7)](docs/06-workflow-phases.md) | The complete phase lifecycle from bootstrap to milestone completion |
+| 6 | [Quality Scaling](docs/07-quality-scaling.md) | Reviewer pattern, git hotspots, mutation testing, cross-model review |
+| 7 | [Knowledge Management](docs/08-knowledge-management.md) | Codebase mapping, indexing, Serena memories |
+| 8 | [Cross-Cutting Workflows](docs/11-cross-cutting-workflows.md) | Debugging, ideas, UI dev, ML, parallelization |
+| 9 | [Session Management](docs/12-session-management.md) | Start, pause, resume, parallel development |
+| 10 | [Mysti + VSCode](docs/13-mysti-vscode.md) | Multi-agent brainstorm, personas, when to use GUI vs CLI |
 
 ### Reference
 
@@ -153,8 +153,8 @@ Debug a complex bug                    -> /gsd:debug "description"
 | [Tool Matrix](reference/tool-matrix.md) | Primary vs secondary tool for every need |
 | [Quick Reference](reference/quick-reference.md) | Golden path, SC flags, decision tree |
 | [Tool Inventory](reference/tool-inventory.md) | Complete catalog of all commands and skills |
-| [Prompting Patterns](docs/11-prompting-patterns.md) | Effective prompting from Claude Code's creator |
-| [Anti-Patterns](docs/12-anti-patterns.md) | 22 mistakes to avoid |
+| [Prompting Patterns](docs/14-prompting-patterns.md) | Effective prompting from Claude Code's creator |
+| [Anti-Patterns](docs/15-anti-patterns.md) | 22 mistakes to avoid |
 | [SC Flags](cheatsheets/sc-flags.md) | SuperClaude flags cheat sheet |
 
 ### Examples (copy-paste ready)
