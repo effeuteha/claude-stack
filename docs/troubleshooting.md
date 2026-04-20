@@ -175,6 +175,66 @@ Commit this file so your whole team benefits. Use `settings.local.json` for pers
 
 ---
 
+## `/gsd:spec-phase` Ambiguity Score Is High
+
+**Symptom:** `spec-phase` reports ambiguity ≥ 5/10 and you're not sure how to lower it.
+
+**Fixes:**
+
+1. **Read the open questions** — `SPEC.md` will list the requirements the agent couldn't lock. Each one has a specific question.
+
+2. **Rephrase, don't over-detail** — if a requirement is ambiguous, the answer is usually to be more specific (e.g., "partial updates" → "partial updates via PATCH with JSON Merge Patch semantics").
+
+3. **Accept and move on** — some ambiguity is inherent; rather than fighting it, write it as an explicit open question in `SPEC.md` and resolve in `discuss-phase`.
+
+4. **Break the phase** — a phase with high ambiguity across 4+ requirements is often two phases that got conflated. Use `/gsd:remove-phase` and `/gsd:add-phase` to split.
+
+---
+
+## `/gsd:thread` — State Collisions
+
+**Symptom:** Two threads active, switching between them produces weird context bleed.
+
+**Fixes:**
+
+1. **`/gsd:thread list`** — see all open threads. Archive any that are stale.
+
+2. **`/gsd:thread switch` is not a merge** — threads are parallel containers; you can't merge them automatically.
+
+3. **Serialize** — if two threads conflict over the same code area, pause one (`/gsd:thread archive`) and resume later.
+
+---
+
+## `/gsd:workstreams` — Confused State
+
+**Symptom:** `/gsd:workstreams status` reports inconsistencies or phases assigned to multiple workstreams.
+
+**Fixes:**
+
+1. **`/gsd:workstreams status`** — the diagnostic output will flag orphaned or duplicated phases.
+
+2. **`/gsd:forensics`** — if the history is complex, run forensics against `.planning/` for a post-mortem.
+
+3. **`/gsd:health`** — diagnoses and can auto-repair common `.planning/` issues.
+
+---
+
+## `remember` Plugin Has Stale / Irrelevant Context
+
+**Symptom:** Session startup loads `.remember/now.md` with stuff from an unrelated task.
+
+**Fixes:**
+
+1. **Clear `now.md`** — delete or empty `.remember/now.md` to drop the current buffer.
+
+2. **Promote what matters** — move anything you want preserved to `core-memories.md` before clearing `now.md`.
+
+3. **Prune daily files** — `today-*.md` accumulate; delete old ones that aren't useful.
+
+4. **Archive is read-only by convention** — `archive.md` is for historical reference; don't rely on it for current context.
+
+---
+
 ## GSD State Is Corrupted
 
 **Symptom:** `/gsd:progress` shows wrong state, or GSD commands error out.
