@@ -1,64 +1,99 @@
-# Codebase Knowledge Management
+# 08 — Codebase Knowledge Management
 
-Your codebase knowledge goes stale as you build. Here's how to keep it fresh.
+Your codebase knowledge goes stale as you build. This chapter is about keeping the map fresh — the tools that materialize the codebase as text so Claude can reason about it without reading every file every session.
 
-## When to Re-Map / Re-Index
+(Memory systems — `CLAUDE.md`, auto-memory, Serena memories, GSD state, `remember` — are covered in [09 Memory Systems](09-memory-systems.md). This chapter covers the *codebase-mapping* tools specifically.)
+
+## When to re-map / re-index
 
 | Trigger | Action | Why |
-|---------|--------|-----|
+|---|---|---|
 | **Project start (brownfield)** | `/gsd:map-codebase` + `/sc:index-repo` | Baseline understanding |
-| **After every 2-3 phases** | `/gsd:map-codebase` | Architecture may have shifted |
+| **After every 2–3 phases** | `/gsd:map-codebase` | Architecture may have shifted |
 | **After major refactors** | `/gsd:map-codebase` + `/sc:index-repo` | Structure has changed significantly |
 | **New session on large project** | `/sc:index-repo` (if stale) | Token-efficient session bootstrap |
 | **Before milestone audit** | `/gsd:map-codebase` | Auditor needs current state |
-| **After adding new integrations** | `/gsd:map-codebase` | INTEGRATIONS.md needs updating |
+| **After adding new integrations** | `/gsd:map-codebase` | `INTEGRATIONS.md` needs updating |
 | **When planning touches unfamiliar areas** | Serena `get_symbols_overview` | Targeted understanding |
-| **When context window is tight** | `/sc:index-repo` | 94% token reduction (58K -> 3K) |
+| **When context window is tight** | `/sc:index-repo` or `/gsd:scan` | Big token savings |
+| **Quick project assessment** | `/gsd:scan` | Lightweight alternative to full map |
 
-## The Two Mapping Tools
+## Codebase mapping — four tools
 
-```
-/gsd:map-codebase                         /sc:index-repo
------------------                         --------------
-Creates 7 deep analysis documents         Creates 1 compact index file
-.planning/codebase/                        PROJECT_INDEX.md + .json
-  STACK.md
-  ARCHITECTURE.md                         ~3KB (94% token reduction)
-  STRUCTURE.md
-  CONVENTIONS.md                          Purpose: Token-efficient session
-  TESTING.md                              bootstrap. Read this INSTEAD of
-  INTEGRATIONS.md                         reading the whole codebase.
-  CONCERNS.md
-                                          Best for: Start of sessions,
-Purpose: Deep understanding for           context pressure situations,
-planning and execution.                   quick orientation.
+### `/gsd:map-codebase` — deep parallel analysis
 
-Best for: Before planning phases,         Update: When structure changes
-brownfield onboarding, audits.            significantly.
-
-Update: Every 2-3 phases or after
-major structural changes.
-```
-
-## Serena Memories — Persistent Project Knowledge
-
-Unlike GSD's `.planning/` files (which are git-tracked), Serena memories persist across all conversations:
+Dispatches parallel mapper agents, each focused on one dimension, and writes documents directly to `.planning/codebase/`:
 
 ```
-Serena: write_memory                      # Save insight
-  "auth-architecture"                     # e.g., "Our auth uses JWT with refresh rotation..."
-
-Serena: list_memories                     # Check what's stored
-Serena: read_memory "auth-architecture"   # Recall in future session
+.planning/codebase/
+  STACK.md              # technologies, versions
+  ARCHITECTURE.md       # component boundaries, data flow
+  STRUCTURE.md          # directory layout, naming
+  CONVENTIONS.md        # coding style, patterns
+  TESTING.md            # test strategy, coverage gaps
+  INTEGRATIONS.md       # external systems, APIs
+  CONCERNS.md           # known issues, tech debt
 ```
 
-### When to Write Memories
+**Best for:** before planning a non-trivial phase; brownfield onboarding; milestone audits.
 
-- After discovering non-obvious architectural patterns
-- When you've debugged a tricky issue (save the root cause)
-- Domain-specific knowledge that would be expensive to re-discover
-- Integration quirks or gotchas
-- "This is NOT documented anywhere but it matters"
+**Update cadence:** every 2–3 phases, or after structural changes.
+
+### `/sc:index-repo` — compact index for session bootstrap
+
+Creates `PROJECT_INDEX.md` + `.json` — one compact file (~3 KB) that replaces ~58 KB of codebase reading per session.
+
+**Best for:** the start of every session on a large project; tight-context situations; quick orientation.
+
+**Update:** when structure changes significantly.
+
+### `/gsd:scan` — lightweight rapid assessment
+
+A lighter alternative to `/gsd:map-codebase` when you want a quick read rather than the deep seven-document analysis. Produces a condensed summary.
+
+**Best for:** first look at an unfamiliar repo; spot-check before a small change.
+
+### `/gsd:intel` — query, inspect, refresh
+
+Once codebase intelligence files exist in `.planning/codebase/`, `/gsd:intel` queries them in place or refreshes a single document:
+
+```
+/gsd:intel query "how does auth work"        # Ask the intel files a question
+/gsd:intel refresh ARCHITECTURE              # Re-run just one document
+/gsd:intel inspect                           # Show what's in .planning/codebase/
+```
+
+## Knowledge graphs
+
+Two complementary graph tools — different scopes.
+
+### `/gsd:graphify` — project knowledge graph
+
+Builds, queries, and inspects the project's knowledge graph stored in `.planning/graphs/`. The graph captures relationships between components, requirements, decisions, and artifacts — enabling structural queries like "what phases depend on the auth subsystem?"
+
+**Best for:** large multi-milestone projects where the graph becomes a navigation aid; audits that need relationship queries.
+
+### `graphify` plugin (`/graphify`)
+
+General-purpose: any input (code, docs, papers, images) → knowledge graph → clustered communities → HTML + JSON + audit report.
+
+**Best for:** one-off knowledge-structuring work; converting research notes into a navigable graph; exploratory analysis of an external corpus.
+
+The two don't overlap: `/gsd:graphify` is scoped to the current GSD-managed project; `/graphify` is a standalone tool for arbitrary input.
+
+## Serena symbol navigation — the "point of contact" layer
+
+When planning or executing a change, you often want to understand one specific symbol — a class, a function, a route handler — not the whole codebase. Serena's symbol-level tools are the right scope:
+
+```
+Serena: find_symbol "UserService"                    # Where is it?
+Serena: get_symbols_overview "backend/api.py"        # What's in this file?
+Serena: find_referencing_symbols "authenticate"      # Who calls it?
+Serena: replace_symbol_body "UserService.login"      # Rewrite a whole method
+Serena: search_for_pattern "@deprecated"             # Regex across codebase
+```
+
+For *curated* project knowledge ("here's why we decided X," "here's the recovery recipe for Y"), use Serena memories — see [09 Memory Systems](09-memory-systems.md).
 
 ---
 
