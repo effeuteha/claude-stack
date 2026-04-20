@@ -94,4 +94,4 @@ Match AI quality to task criticality:
 
 ---
 
-**Previous:** [Context Discipline](03-context-discipline.md) | **Next:** [Workflow Phases](05-workflow-phases.md)
+**Previous:** [Context Discipline](04-context-discipline.md) | **Next:** [Workflow Phases](06-workflow-phases.md)

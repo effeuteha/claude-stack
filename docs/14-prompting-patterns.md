@@ -71,4 +71,4 @@ When debugging UI issues or errors, share screenshots directly. Claude is multim
 
 ---
 
-**Previous:** [Mysti + VSCode](10-mysti-vscode.md) | **Next:** [Anti-Patterns](12-anti-patterns.md)
+**Previous:** [Mysti + VSCode](13-mysti-vscode.md) | **Next:** [Anti-Patterns](15-anti-patterns.md)
