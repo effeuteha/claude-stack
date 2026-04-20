@@ -31,4 +31,4 @@
 
 **Having one of these problems?** See [Troubleshooting](troubleshooting.md) for step-by-step fixes.
 
-**Previous:** [Prompting Patterns](11-prompting-patterns.md)
+**Previous:** [Prompting Patterns](14-prompting-patterns.md)

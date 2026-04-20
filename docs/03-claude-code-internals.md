@@ -190,4 +190,4 @@ Share these with your team by committing `.claude/settings.json`. Use `.claude/s
 
 ---
 
-**Previous:** [Architecture Overview](01-architecture.md) | **Next:** [Context Discipline](03-context-discipline.md)
+**Previous:** [Architecture Overview](01-architecture.md) | **Next:** [Context Discipline](04-context-discipline.md)

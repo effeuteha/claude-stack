@@ -88,4 +88,4 @@ This state persists across sessions and is git-tracked, so your entire team can 
 
 ---
 
-**Next:** [Claude Code Internals](02-claude-code-internals.md) — understand how CLAUDE.md loading, memory, and settings work under the hood.
+**Next:** [Claude Code Internals](03-claude-code-internals.md) — understand how CLAUDE.md loading, memory, and settings work under the hood.

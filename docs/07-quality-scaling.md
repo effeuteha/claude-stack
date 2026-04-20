@@ -78,6 +78,6 @@ The key insight: "The more tokens you throw at a coding problem, the better the 
 
 ---
 
-**See also:** [Anti-Patterns](12-anti-patterns.md) #1 (skipping spec-panel) and #14 (autonomous without review) — the two most common quality-related mistakes.
+**See also:** [Anti-Patterns](15-anti-patterns.md) #1 (skipping spec-panel) and #14 (autonomous without review) — the two most common quality-related mistakes.
 
-**Previous:** [Workflow Phases](05-workflow-phases.md) | **Next:** [Knowledge Management](07-knowledge-management.md)
+**Previous:** [Workflow Phases](06-workflow-phases.md) | **Next:** [Knowledge Management](08-knowledge-management.md)

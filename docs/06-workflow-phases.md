@@ -42,7 +42,7 @@ Context window getting full?       -> Pressure flow (save + clear + resume)
 5. /gsd:resume-work                 # Restore in fresh context
 ```
 
-See [Context Discipline](03-context-discipline.md) for details on managing context pressure.
+See [Context Discipline](04-context-discipline.md) for details on managing context pressure.
 
 ---
 
@@ -292,6 +292,6 @@ Serena: write_memory
 
 ---
 
-**Avoid common mistakes:** See [Anti-Patterns](12-anti-patterns.md) — especially #1 (skipping spec-panel), #9 (executing without /clear), and #14 (autonomous without review).
+**Avoid common mistakes:** See [Anti-Patterns](15-anti-patterns.md) — especially #1 (skipping spec-panel), #9 (executing without /clear), and #14 (autonomous without review).
 
-**Previous:** [Task Routing](04-task-routing.md) | **Next:** [Quality Scaling](06-quality-scaling.md)
+**Previous:** [Task Routing](05-task-routing.md) | **Next:** [Quality Scaling](07-quality-scaling.md)

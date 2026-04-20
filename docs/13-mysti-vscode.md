@@ -125,7 +125,7 @@ Claude Code, Copilot CLI, Gemini, Codex, Cline, Cursor, OpenClaw, OpenCode, Qwen
 
 ---
 
-**Previous:** [Session Management](09-session-management.md) | **Next:** [Prompting Patterns](11-prompting-patterns.md)
+**Previous:** [Session Management](12-session-management.md) | **Next:** [Prompting Patterns](14-prompting-patterns.md)
 
 ### Architecture Decisions (Phase 3)
 ```

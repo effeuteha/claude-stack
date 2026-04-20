@@ -113,4 +113,4 @@ START SESSION
 
 ---
 
-**Previous:** [Claude Code Internals](02-claude-code-internals.md) | **Next:** [Task Routing](04-task-routing.md)
+**Previous:** [Claude Code Internals](03-claude-code-internals.md) | **Next:** [Task Routing](05-task-routing.md)

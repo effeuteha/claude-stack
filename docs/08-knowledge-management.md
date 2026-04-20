@@ -62,4 +62,4 @@ Serena: read_memory "auth-architecture"   # Recall in future session
 
 ---
 
-**Previous:** [Quality Scaling](06-quality-scaling.md) | **Next:** [Cross-Cutting Workflows](08-cross-cutting-workflows.md)
+**Previous:** [Quality Scaling](07-quality-scaling.md) | **Next:** [Cross-Cutting Workflows](11-cross-cutting-workflows.md)
