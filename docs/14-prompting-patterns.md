@@ -2,6 +2,18 @@
 
 Effective prompting patterns gathered from Claude Code's creator and power users.
 
+## Brainstorm First, Build Second
+
+The single highest-leverage pattern: before any creative work, invoke the brainstorming skill so Claude interrogates the requirements with you instead of assuming them. This is the first commitment of the [Discipline Layer](02-discipline-layer.md) and it compounds with every other pattern below.
+
+```
+/superpowers:brainstorming
+# or, for a phase:
+/gsd:spec-phase N
+```
+
+Implementation questions hide requirement ambiguity — brainstorm-first surfaces the ambiguity before it turns into rework.
+
 ## Challenge Claude (Don't Accept Mediocrity)
 
 ```

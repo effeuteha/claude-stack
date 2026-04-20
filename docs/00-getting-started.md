@@ -1,18 +1,19 @@
 # Getting Started — Stack Profiles
 
-Not everyone needs 100+ tools on day one. Pick a profile that matches your needs and grow from there.
+Not everyone needs 150+ commands, skills, and MCP tools on day one. Pick a profile that matches your tier and grow from there. The profiles below map roughly to the tiers in the [Tool Inventory](../reference/tool-inventory.md) (Core / Workflow / On-Demand).
 
 ---
 
-## Minimal Profile
+## Minimal Profile — partial Core tier
 
-**3 tools. Get productive in 10 minutes.**
+**4 tools. Get productive in 10 minutes.**
 
 Best for: Solo developers, small projects, getting started with AI-assisted development.
 
 | Tool | Purpose | Install |
 |------|---------|---------|
 | **Claude Code** | Core AI agent | `npm install -g @anthropic-ai/claude-code` |
+| **Superpowers** | Discipline (TDD, brainstorm, verify) | [github.com/obra/superpowers](https://github.com/obra/superpowers) |
 | **GSD** | Project lifecycle | [github.com/gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) |
 | **Context7 MCP** | Library docs | Add to `.mcp.json` (see below) |
 
@@ -63,7 +64,7 @@ Upgrade to Standard when you find yourself:
 
 ---
 
-## Standard Profile
+## Standard Profile — Core tier
 
 **6 tools. The sweet spot for most developers.**
 
@@ -73,7 +74,6 @@ Everything in Minimal, plus:
 |------|---------|---------|
 | **SuperClaude** | Strategic thinking | [github.com/NomenAK/SuperClaude](https://github.com/NomenAK/SuperClaude) |
 | **Serena MCP** | Code intelligence | [github.com/oraios/serena](https://github.com/oraios/serena) |
-| **Sequential Thinking MCP** | Complex reasoning | Add to `.mcp.json` |
 
 ### Additional Setup
 
@@ -138,19 +138,23 @@ Upgrade to Full when you find yourself:
 
 ---
 
-## Full Profile
+## Full Profile — Core + Workflow tier
 
-**10+ tools. Maximum capability.**
+**15+ tools. Maximum capability.**
 
-Everything in Standard, plus:
+Everything in Standard, plus the Workflow tier:
 
 | Tool | Purpose | Install |
 |------|---------|---------|
 | **Mysti** (VSCode) | Multi-agent GUI | `ext install DeepMyst.mysti` |
 | **Playwright MCP** | Browser testing | Add to `.mcp.json` |
-| **Superpowers** | Workflow discipline | [github.com/obra/superpowers](https://github.com/obra/superpowers) |
-| **nWave** (optional) | SDLC methodology | `/plugin marketplace add nwave-ai/nwave` |
-| **HuggingFace** (optional) | ML ops | Follow HF Skills instructions |
+| **Sequential Thinking MCP** | Complex reasoning | Add to `.mcp.json` |
+| **feature-dev** plugin | Guided feature development | `/plugin marketplace add` |
+| **frontend-design** plugin | UI component generation | `/plugin marketplace add` |
+| **code-review** plugin | Fresh-context PR review | `/plugin marketplace add` |
+| **claude-md-management** plugin | CLAUDE.md audits | `/plugin marketplace add` |
+| **claude-code-setup** plugin | Automation recommender | `/plugin marketplace add` |
+| **remember** plugin | Session continuity | `/plugin marketplace add` |
 
 ### What You Gain
 
@@ -218,24 +222,23 @@ Your CLAUDE.md, GSD state, and MCP servers are inherited automatically when Myst
 
 ```
 Week 1: Minimal
-  Learn Claude Code + GSD basics
-  Get comfortable with plan -> execute -> verify
+  Learn Claude Code + GSD + Superpowers basics
+  Get comfortable with spec -> discuss -> plan -> execute -> verify -> ship
 
 Week 2: + SuperClaude
   Add brainstorm, design, analyze
-  Start reviewing plans with spec-panel
+  Start reviewing plans with /sc:spec-panel
 
 Week 3: + Serena + Context7
   Navigate code semantically
   Look up library docs without leaving Claude
 
-Week 4: + Superpowers
-  Add TDD, systematic debugging, verification
-  Build discipline into your workflow
+Week 4: + Workflow plugins (feature-dev, frontend-design, code-review)
+  Specialized commands for specific task shapes
 
-Week 5: + Mysti (if VSCode user)
-  Multi-model brainstorming
-  Architecture debates between Claude + Gemini
+Week 5: + Mysti + /gsd:review (cross-AI)
+  Multi-model brainstorming and cross-AI plan review
+  Architecture debates across providers
 ```
 
 ---
@@ -260,6 +263,10 @@ bash setup.sh
 
 ## See Also
 
+- [01 Architecture Overview](01-architecture.md) — the 4-layer model
+- [02 Discipline Layer](02-discipline-layer.md) — Superpowers methodology
+- [09 Memory Systems](09-memory-systems.md) — the six memory mechanisms
+- [10 Parallel Work](10-parallel-work.md) — worktrees, workstreams, threads, subagents
 - [Troubleshooting](troubleshooting.md) — common problems and how to fix them
-- [Anti-Patterns](15-anti-patterns.md) — 22 mistakes to avoid
+- [Anti-Patterns](15-anti-patterns.md) — 28 mistakes to avoid
 - [Walkthrough: API Feature](walkthrough-api-feature.md) — see the full workflow in action

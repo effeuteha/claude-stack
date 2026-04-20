@@ -106,16 +106,27 @@ Claude Code, Copilot CLI, Gemini, Codex, Cline, Cursor, OpenClaw, OpenCode, Qwen
 
 ## Recommended Integration Patterns
 
-### Brainstorming (Phase 1, Step 4.1)
+### Brainstorming (before spec-phase)
 ```
 1. Open Mysti (Ctrl+Shift+M)
 2. Select Brainstorm -> Debate strategy
 3. @claude + @gemini (or @codex)
 4. Paste your phase context
-5. Let agents debate, then feed consensus into /gsd:discuss-phase
+5. Let agents debate, then feed consensus into /gsd:spec-phase or /gsd:discuss-phase
 ```
 
-### Security Reviews (Phase 6)
+### Cross-model plan review (Phase 3.5)
+```
+1. Finish /gsd:plan-phase N in terminal
+2. In Mysti Brainstorm -> Red-Team:
+   - @claude (Defender) + @gemini (Challenger)
+3. Paste PLAN.md
+4. Feed findings back into the plan OR use /gsd:review for CLI-based cross-AI review
+```
+
+See [07 Quality Scaling](07-quality-scaling.md) — Mysti Red-Team is a GUI alternative to `/gsd:review`, but `/gsd:review` is CLI-native and integrates with the GSD lifecycle.
+
+### Security reviews (Phase 5 Analyze)
 ```
 1. Mysti Brainstorm -> Red-Team
 2. @claude (Proposer) + @gemini (Challenger)
@@ -123,22 +134,22 @@ Claude Code, Copilot CLI, Gemini, Codex, Cline, Cursor, OpenClaw, OpenCode, Qwen
 4. Feed findings into /sc:analyze --focus security
 ```
 
----
-
-**Previous:** [Session Management](12-session-management.md) | **Next:** [Prompting Patterns](14-prompting-patterns.md)
-
-### Architecture Decisions (Phase 3)
+### Architecture decisions
 ```
 1. Mysti Brainstorm -> Perspectives
 2. @claude (Risk Analyst) + @codex (Innovator)
 3. Evaluate tradeoffs
-4. Feed into /gsd:new-milestone scope
+4. Feed into /gsd:new-milestone scope or /gsd:spec-phase
 ```
 
-### Code Review (Phase 6)
+### Code review (Phase 5 Analyze)
 ```
 1. Mysti Brainstorm -> Quick
 2. @claude + @gemini
 3. Both review the same diff independently
-4. Merge insights into PR feedback
+4. Merge insights into PR feedback — or use /code-review:code-review for a CLI-native alternative
 ```
+
+---
+
+**Previous:** [Session Management](12-session-management.md) | **Next:** [Prompting Patterns](14-prompting-patterns.md)
