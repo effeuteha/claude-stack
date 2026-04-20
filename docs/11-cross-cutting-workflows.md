@@ -106,4 +106,4 @@ superpowers:subagent-driven-development    # For executing plans with parallel t
 
 ---
 
-**Previous:** [Knowledge Management](08-knowledge-management.md) | **Next:** [Session Management](12-session-management.md)
+**Previous:** [Parallel Work](10-parallel-work.md) | **Next:** [Session Management](12-session-management.md)
