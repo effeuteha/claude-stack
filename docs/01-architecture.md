@@ -88,4 +88,4 @@ This state persists across sessions and is git-tracked, so your entire team can 
 
 ---
 
-**Next:** [Claude Code Internals](03-claude-code-internals.md) — understand how CLAUDE.md loading, memory, and settings work under the hood.
+**Next:** [02 Discipline Layer →](02-discipline-layer.md) — the Superpowers methodology and how it compounds with every other layer.
