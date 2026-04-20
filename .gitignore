@@ -1,0 +1,26 @@
+# Internal project namespaces — must never be committed
+.olorin/
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Per-user Claude settings
+.claude/settings.local.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+node_modules/
+__pycache__/
+.idea/
+.vscode/
+*.log
+
+# GSD workflow state (claude-stack is a docs repo — internal planning only)
+.planning/
+
+# Superpowers spec & plan artifacts (internal, not public)
+docs/superpowers/
