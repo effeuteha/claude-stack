@@ -1,6 +1,3 @@
-# Internal project namespaces — must never be committed
-.olorin/
-
 # Secrets
 .env
 .env.*

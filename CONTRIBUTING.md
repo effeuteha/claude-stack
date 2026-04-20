@@ -6,7 +6,7 @@ Thanks for your interest in improving the guide. Here's how to contribute.
 
 `claude-stack` is positioned as an opinionated guide — the curator's voice stays tight, tools earn their place. Before opening a PR:
 
-- **No internal project references.** The `.gitignore` excludes internal namespaces (`.olorin/`, `.planning/`, `docs/superpowers/`); please don't work around these or include client/employer project names in examples.
+- **No internal project references.** The `.gitignore` excludes local-only artifacts (`.planning/`, `docs/superpowers/`); please don't work around these or include client/employer project names in examples. Use your local `.git/info/exclude` for personal scratch directories.
 - **No secrets or credentials.** API keys, tokens, `.env` files, private hostnames, internal IPs — none of this should ever appear in a PR.
 - **No excluded tools.** `goodmem`, `claude-mem`, `obsidian-skills` are deliberately out of scope (credentials required, license concerns, or too narrow for a general audience). Don't add them back.
 

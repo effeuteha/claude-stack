@@ -74,11 +74,9 @@ A single project rarely needs all six. But knowing which exists — and which ga
 
 The litmus test: *who needs to read this, and over what timescale?* Project-scoped + shared → `CLAUDE.md`. Cross-project + about you → auto-memory. Mid-task + short-lived → `remember`. Everything else usually lives in the natural artifact (spec, plan, code).
 
-## Excluded from the stack
+## Adopting tools outside this list
 
-- **`goodmem`** — requires special credentials, so a reader can't install it from this guide.
-
-If you adopt a memory tool outside this list, the question to ask yourself is the same: *what timescale and scope does it cover, and does it overlap with something that's already pulling its weight?* Memory tools that capture *everything* without curation trade attention for breadth — decide whether that trade fits your threat model.
+If you reach for a memory tool outside the six above, the question to ask yourself is the same: *what timescale and scope does it cover, and does it overlap with something that's already pulling its weight?* Memory tools that capture *everything* without curation trade attention for breadth — decide whether that trade fits your threat model. Tools that require external credentials or proprietary services push configuration complexity onto every reader; weigh that against the value they add.
 
 ## See also
 
