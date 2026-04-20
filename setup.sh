@@ -69,6 +69,15 @@ else
     echo -e "  ${RED}✗${NC} SuperClaude ${YELLOW}(not detected)${NC}"
 fi
 
+# Check for Superpowers
+if [ -d "$HOME/.claude/plugins" ] && find "$HOME/.claude/plugins" -path "*superpowers*" 2>/dev/null | grep -q .; then
+    echo -e "  ${GREEN}✓${NC} Superpowers"
+elif [ -d "$HOME/.claude/skills" ] && find "$HOME/.claude/skills" -path "*superpowers*" 2>/dev/null | grep -q .; then
+    echo -e "  ${GREEN}✓${NC} Superpowers"
+else
+    echo -e "  ${RED}✗${NC} Superpowers ${YELLOW}(not detected)${NC}"
+fi
+
 # Check for MCP config
 if [ -f ".mcp.json" ]; then
     echo -e "  ${GREEN}✓${NC} .mcp.json"
@@ -100,9 +109,9 @@ echo ""
 # Choose profile
 echo -e "${BOLD}Choose your stack profile:${NC}"
 echo ""
-echo -e "  ${GREEN}1)${NC} Minimal    — Claude Code + GSD + Context7 (3 tools)"
-echo -e "  ${BLUE}2)${NC} Standard   — + SuperClaude + Serena + Seq. Thinking (6 tools)"
-echo -e "  ${PURPLE}3)${NC} Full       — + Mysti + Playwright + Superpowers (10+ tools)"
+echo -e "  ${GREEN}1)${NC} Minimal    — Claude Code + Superpowers + GSD + Context7 (4 tools, partial Core tier)"
+echo -e "  ${BLUE}2)${NC} Standard   — + SuperClaude + Serena (6 tools, full Core tier)"
+echo -e "  ${PURPLE}3)${NC} Full       — + Workflow-tier plugins + MCPs (15+ tools, Core + Workflow)"
 echo -e "  ${CYAN}4)${NC} Config Only — Just copy config files, I'll install tools myself"
 echo ""
 read -p "  Enter choice [1-4]: " PROFILE
@@ -306,14 +315,16 @@ if [ "$GSD_OK" = false ]; then
     echo -e "  ${YELLOW}2.${NC} Install GSD: ${CYAN}https://github.com/gsd-build/get-shit-done${NC}"
 fi
 
+echo -e "  ${YELLOW}•${NC} Install Superpowers: ${CYAN}https://github.com/obra/superpowers${NC} (Core tier — recommended for all profiles)"
+
 if [ "$PROFILE_NAME" = "standard" ] || [ "$PROFILE_NAME" = "full" ]; then
-    echo -e "  ${YELLOW}3.${NC} Install SuperClaude: ${CYAN}https://github.com/NomenAK/SuperClaude${NC}"
-    echo -e "  ${YELLOW}4.${NC} Install Superpowers: ${CYAN}https://github.com/obra/superpowers${NC}"
-    echo -e "  ${YELLOW}5.${NC} Configure Serena: ${CYAN}https://github.com/oraios/serena${NC}"
+    echo -e "  ${YELLOW}•${NC} Install SuperClaude: ${CYAN}https://github.com/NomenAK/SuperClaude${NC}"
+    echo -e "  ${YELLOW}•${NC} Configure Serena: ${CYAN}https://github.com/oraios/serena${NC}"
 fi
 
 if [ "$PROFILE_NAME" = "full" ]; then
-    echo -e "  ${YELLOW}6.${NC} Install Mysti (VSCode): ${CYAN}ext install DeepMyst.mysti${NC}"
+    echo -e "  ${YELLOW}•${NC} Install Mysti (VSCode): ${CYAN}ext install DeepMyst.mysti${NC}"
+    echo -e "  ${YELLOW}•${NC} Install Workflow-tier plugins: feature-dev, frontend-design, code-review, claude-md-management, claude-code-setup, remember (via \`/plugin marketplace add\`)"
 fi
 
 echo ""
