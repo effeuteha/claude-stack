@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" role="img" aria-labelledby="title desc">
+  <title id="title">claude-stack: golden path with dual review fork</title>
+  <desc id="desc">Linear lifecycle from /gsd:progress through /gsd:ship, with a dual review fork (/sc:spec-panel and /gsd:review) between plan-phase and execute-phase.</desc>
+
+  <style>
+    .step       { fill:#F8FAFC; stroke:#334155; stroke-width:2; }
+    .step-txt   { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:14px; fill:#0F172A; font-weight:600; }
+    .step-sub   { font-family: system-ui, -apple-system, sans-serif; font-size:11px; fill:#475569; }
+    .arrow      { stroke:#334155; stroke-width:2; fill:none; }
+    .review     { fill:#FEF3C7; stroke:#92400E; }
+    .review-txt { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; fill:#78350F; font-weight:600; }
+  </style>
+
+  <rect class="step" x="340" y="20"  width="220" height="50" rx="8"/>
+  <text class="step-txt" x="355" y="45">/gsd:progress</text>
+  <text class="step-sub" x="355" y="62">Where am I?</text>
+  <path class="arrow" d="M 450 70 L 450 90"/>
+  <path class="arrow" d="M 450 90 L 444 82 M 450 90 L 456 82"/>
+
+  <rect class="step" x="340" y="100" width="220" height="50" rx="8"/>
+  <text class="step-txt" x="355" y="125">/gsd:spec-phase N</text>
+  <text class="step-sub" x="355" y="142">Lock WHAT (ambiguity score)</text>
+  <path class="arrow" d="M 450 150 L 450 170"/>
+  <path class="arrow" d="M 450 170 L 444 162 M 450 170 L 456 162"/>
+
+  <rect class="step" x="340" y="180" width="220" height="50" rx="8"/>
+  <text class="step-txt" x="355" y="205">/gsd:discuss-phase N</text>
+  <text class="step-sub" x="355" y="222">Gray-area decisions</text>
+  <path class="arrow" d="M 450 230 L 450 250"/>
+  <path class="arrow" d="M 450 250 L 444 242 M 450 250 L 456 242"/>
+
+  <rect class="step" x="340" y="260" width="220" height="50" rx="8"/>
+  <text class="step-txt" x="355" y="285">/gsd:plan-phase N</text>
+  <text class="step-sub" x="355" y="302">Tasks + verification</text>
+
+  <path class="arrow" d="M 450 310 L 450 330 L 200 330"/>
+  <path class="arrow" d="M 450 310 L 450 330 L 700 330"/>
+
+  <rect class="step review" x="80"  y="350" width="230" height="50" rx="8"/>
+  <text class="review-txt" x="95" y="375">/sc:spec-panel</text>
+  <text class="step-sub"    x="95" y="392">Multi-expert in Claude</text>
+
+  <rect class="step review" x="590" y="350" width="230" height="50" rx="8"/>
+  <text class="review-txt" x="605" y="375">/gsd:review</text>
+  <text class="step-sub"    x="605" y="392">Cross-AI peer review</text>
+
+  <path class="arrow" d="M 200 400 L 200 430 L 450 430"/>
+  <path class="arrow" d="M 700 400 L 700 430 L 450 430"/>
+  <path class="arrow" d="M 450 430 L 450 450"/>
+  <path class="arrow" d="M 450 450 L 444 442 M 450 450 L 456 442"/>
+
+  <rect class="step" x="340" y="460" width="220" height="50" rx="8"/>
+  <text class="step-txt" x="355" y="485">/gsd:execute-phase N</text>
+  <text class="step-sub" x="355" y="502">Wave-based parallelization</text>
+  <path class="arrow" d="M 450 510 L 450 525"/>
+
+  <rect class="step" x="60"  y="540" width="220" height="50" rx="8"/>
+  <text class="step-txt" x="75" y="565">/sc:analyze</text>
+  <text class="step-sub" x="75" y="582">Quality scan</text>
+
+  <rect class="step" x="340" y="540" width="220" height="50" rx="8"/>
+  <text class="step-txt" x="355" y="565">/gsd:verify-work N</text>
+  <text class="step-sub" x="355" y="582">UAT</text>
+
+  <rect class="step" x="620" y="540" width="220" height="50" rx="8"/>
+  <text class="step-txt" x="635" y="565">/gsd:ship</text>
+  <text class="step-sub" x="635" y="582">PR + review + merge</text>
+
+  <path class="arrow" d="M 280 565 L 340 565"/>
+  <path class="arrow" d="M 560 565 L 620 565"/>
+
+  <path class="arrow" d="M 450 525 L 170 525 L 170 540"/>
+</svg>
