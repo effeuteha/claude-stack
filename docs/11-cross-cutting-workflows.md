@@ -1,30 +1,97 @@
-# Cross-Cutting Workflows
+# 11 — Cross-Cutting Workflows
 
 Workflows that apply regardless of which phase you're in.
 
 ## Debugging
 
 ```
-/gsd:debug "issue description"            # Persistent debug session
-                                           # Survives /clear -- run /gsd:debug to resume
+/gsd:debug "issue description"            # Persistent debug session; survives /clear
+                                          # Re-run /gsd:debug to resume the same investigation
 ```
+
+`/gsd:debug` runs a scientific-method investigation with persistent state across context resets — each cycle has a hypothesis, predicted observation, and experiment. See Superpowers' `systematic-debugging` skill ([Ch 02](02-discipline-layer.md)) for the discipline this is built on.
 
 For complex bugs, combine with:
 ```
-Sequential Thinking: sequentialthinking    # Multi-step hypothesis testing
-Serena: find_referencing_symbols           # Trace call chains
-/sc:troubleshoot                           # Diagnose builds, deployments, systems
+Sequential Thinking: sequentialthinking   # Multi-step hypothesis testing
+Serena: find_referencing_symbols          # Trace call chains
+/sc:troubleshoot                          # Diagnose builds, deployments, systems
 ```
 
-## Idea Capture
+## Post-mortem: `/gsd:forensics`
+
+When a GSD workflow fails or produces bad output — a phase that shipped a regression, a milestone that missed its goal, a plan that collapsed during execute — use `/gsd:forensics` to diagnose what went wrong:
 
 ```
-/gsd:note "raw idea or thought"           # Zero-friction capture (append/list/promote)
+/gsd:forensics
+```
+
+Analyzes git history, `.planning/` artifacts, and state to diagnose the root cause. Produces a post-mortem report. Use this instead of poking at files manually — the forensics agent has the full phase manifest and can trace causality.
+
+## Autonomous audit → fix: `/gsd:audit-fix`
+
+For follow-up quality work where you want an end-to-end cycle without per-step prompting:
+
+```
+/gsd:audit-fix
+```
+
+Runs: find issues → classify severity → apply fixes → run tests → commit per fix. Use on a feature branch, not main. Good for sweeping a mature codebase for consistency issues or grinding through low-severity tech debt. See [07 Quality Scaling](07-quality-scaling.md) for placement.
+
+## AI-integration phase walkthrough
+
+For any phase that builds AI/LLM functionality, the generic `/gsd:plan-phase` is wrong — it doesn't know to ask about evaluation strategy. Use the specialized flow:
+
+```
+1. /gsd:ai-integration-phase N            # Produces AI-SPEC.md
+                                          #   - Framework selection
+                                          #   - Evaluation strategy (rubrics, eval sets)
+                                          #   - Domain-expert failure modes
+                                          #   - Guardrails
+2. /gsd:plan-phase N                      # Normal plan, now informed by AI-SPEC
+3. /gsd:execute-phase N                   # Build it
+4. /gsd:eval-review                       # Retroactive coverage audit against AI-SPEC
+```
+
+`/gsd:eval-review` scores each eval dimension as COVERED / PARTIAL / MISSING and produces an `EVAL-REVIEW.md` with remediation guidance.
+
+## UI phase walkthrough
+
+For frontend phases, pair the UI-specific spec with the generation plugin and the visual audit:
+
+```
+1. /gsd:ui-phase N                        # Produces UI-SPEC.md design contract
+2. /frontend-design:frontend-design       # Generate components matching the spec
+3. /gsd:ui-review                         # 6-pillar post-implementation audit
+```
+
+For exploratory UI work before committing to a spec:
+
+```
+/gsd:sketch                               # Multi-variant HTML mockups (throwaway)
+/gsd:sketch-wrap-up                       # Package findings as a project skill
+```
+
+With Playwright for automated visual checks:
+
+```
+Playwright: browser_navigate              # Navigate to dev server
+Playwright: browser_snapshot              # Capture accessibility tree
+Playwright: browser_take_screenshot       # Visual verification
+```
+
+## Idea capture
+
+```
+/gsd:note "raw idea or thought"           # Zero-friction capture (append / list / promote)
 /gsd:add-todo "actionable task"           # Directly to todo list
+/gsd:add-backlog "999.x parking lot"      # Lower-priority items
+/gsd:plant-seed "forward-looking idea"    # Surfaces at the right milestone via trigger
 /gsd:check-todos                          # Review when ready
+/gsd:review-backlog                       # Promote backlog to active milestone
 ```
 
-## Urgent Mid-Milestone Work
+## Urgent mid-milestone work
 
 ```
 /gsd:insert-phase 5 "Critical fix"       # Creates phase 5.1
@@ -32,25 +99,10 @@ Serena: find_referencing_symbols           # Trace call chains
 /gsd:execute-phase 5.1
 ```
 
-## Frontend / UI Development
+## Code improvement (non-feature work)
 
 ```
-/frontend-design:frontend-design          # High-quality UI generation
-/gsd:ui-phase N                           # Generate UI-SPEC.md design contract
-/gsd:ui-review                            # Retroactive 6-pillar visual audit
-```
-
-With Playwright (enable on demand):
-```
-Playwright: browser_navigate              # Navigate to dev server
-Playwright: browser_snapshot              # Capture accessibility tree
-Playwright: browser_take_screenshot       # Visual verification
-```
-
-## Code Improvement (Non-Feature Work)
-
-```
-/sc:cleanup                               # Dead code removal, structure optimization
+/sc:cleanup                               # Dead-code removal, structure optimization
 /sc:improve                               # Quality, performance, maintainability
 /sc:analyze --focus performance           # Find performance bottlenecks
 /sc:analyze --focus security              # Security audit
@@ -63,45 +115,36 @@ Playwright: browser_take_screenshot       # Visual verification
 /sc:document "component or feature"       # Focused component docs
 /sc:index                                 # Full project knowledge base
 /sc:explain "concept or code"             # Educational explanations
+/gsd:docs-update                          # Generate/update project docs verified against code
 ```
 
-## ML / HuggingFace Operations (Enable on Demand)
+## Parallel work
 
-```
-/huggingface-skills:hugging-face-cli            # Model/dataset download, upload
-/huggingface-skills:hugging-face-model-trainer   # Fine-tuning
-/huggingface-skills:hugging-face-datasets        # Dataset management
-/huggingface-skills:hugging-face-evaluation      # Model evaluation
-```
+See [10 Parallel Work](10-parallel-work.md) for the full catalog: worktrees, workstreams, threads, subagent-driven-development, dispatching-parallel-agents. That chapter has the decision tree for which mechanism fits which shape of parallelism.
 
-## Multi-Agent Parallelization
-
-When facing 2+ independent tasks:
-```
-superpowers:dispatching-parallel-agents    # Auto-triggered for parallel work
-superpowers:subagent-driven-development    # For executing plans with parallel tasks
-```
-
-## Automation & Configuration
+## Automation & configuration
 
 ```
 /claude-code-setup:claude-automation-recommender  # Analyze codebase, recommend automations
 /update-config                            # Configure hooks, permissions, env vars
 /keybindings-help                         # Customize keyboard shortcuts
+/fewer-permission-prompts                 # Scan transcripts, build an allowlist
 ```
 
-## Recurring Tasks
+## Recurring tasks
 
 ```
 /loop 5m /gsd:progress                    # Poll progress every 5 minutes
 /loop 10m "check deploy status"           # Monitor periodically
+/schedule                                 # Cron-scheduled remote agents
 ```
 
-## Planning Health
+## Planning health
 
 ```
 /gsd:health                               # Diagnose .planning/ directory issues
 /gsd:stats                                # Project statistics (phases, git metrics, timeline)
+/gsd:inbox                                # Triage GitHub issues / PRs against templates
 ```
 
 ---
