@@ -1,6 +1,6 @@
 # Anti-Patterns to Avoid
 
-22 mistakes to avoid and what to do instead.
+28 mistakes to avoid and what to do instead.
 
 | # | Anti-Pattern | Why It's Bad | Do This Instead |
 |---|---|---|---|
@@ -26,6 +26,12 @@
 | 20 | One massive CLAUDE.md file | Hard to maintain, exceeds effective line limits | Split into `.claude/rules/*.md` modules |
 | 21 | Not committing permissions to settings.json | Every team member re-approves the same tools | Share permission wildcards via `.claude/settings.json` |
 | 22 | Arguing with Claude in degraded context | Wasted tokens in a polluted context | `Esc Esc` or `/rewind`, then re-prompt cleanly |
+| 23 | Skipping brainstorm-first on a new feature | Implementation decisions smuggle in before requirements are clear; spec is what's in your head, not on paper | Invoke `/superpowers:brainstorming` (or `/gsd:spec-phase`) before any creative work |
+| 24 | Claiming done without verification | "Tests should pass" / "it should work"; PRs opened with undiscovered failures | Run the verification command, read the output, cite it — use Superpowers `verification-before-completion` |
+| 25 | Single-model review on a high-stakes plan | `/sc:spec-panel` alone on critical phases — shared Claude blindspots survive | Pair with `/gsd:review` for cross-AI peer review on high-stakes work |
+| 26 | Wrong phase type chosen | Generic `/gsd:plan-phase` for AI/LLM or frontend work — missing eval gates or design-contract shape | For AI features: `/gsd:ai-integration-phase`; frontend: `/gsd:ui-phase`; exploration: `/gsd:sketch` / `/gsd:spike` |
+| 27 | No worktrees for parallel work | Two features sharing one checkout; `HEAD` swaps corrupt in-progress state | Use `git worktree add` per parallel feature; Superpowers `using-git-worktrees` has safety patterns |
+| 28 | Skipped spec-phase on non-trivial phase | Ambiguous requirements turn into implementation decisions mid-execute — rework when reality diverges from unstated assumption | Run `/gsd:spec-phase` to produce `SPEC.md` with ambiguity score before `/gsd:discuss-phase` |
 
 ---
 
