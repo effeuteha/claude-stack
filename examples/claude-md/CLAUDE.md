@@ -107,6 +107,25 @@ await redis.publish("task.updated", json.dumps(payload))
 - Rate limiting: 100 req/min per user (configurable)
 - CORS: frontend origin only in production
 
+## Superpowers expectations
+
+<!--
+  If your team uses the Superpowers plugin, document which discipline
+  commitments you expect Claude (and teammates) to honor on this project.
+  These are enforced by Superpowers skills that auto-trigger on matching
+  context — listing them here clarifies WHEN they apply on this codebase.
+-->
+
+Team norms on this project:
+
+- **brainstorm-first:** invoke `/superpowers:brainstorming` (or `/gsd:spec-phase`) before any new feature work.
+- **TDD:** write the failing test before any implementation code.
+- **verify-before-complete:** no `done` / `fixed` claim without running the verification command and citing output.
+- **git worktrees:** for parallel feature work, use `git worktree add` to avoid checkout pollution.
+- **cross-AI review:** high-stakes plans (AI integration, security-sensitive, data migrations) get both `/sc:spec-panel` (multi-expert in Claude) AND `/gsd:review` (cross-AI peer review).
+
+Corresponding skills auto-trigger on matching context; see `.claude/plugins/.../superpowers/` for the full set.
+
 ## Testing
 
 ```bash

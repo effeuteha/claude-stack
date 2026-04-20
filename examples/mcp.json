@@ -12,6 +12,11 @@
       "command": "uvx",
       "args": ["serena"],
       "_comment": "Serena MCP — semantic code intelligence. Requires Python/uvx. See https://github.com/oraios/serena for full setup including project configuration."
+    },
+    "playwright": {
+      "_comment_enable": "OPTIONAL. Uncomment the command/args below to enable browser automation for web-UI workflows. See https://github.com/microsoft/playwright-mcp.",
+      "_command": "npx",
+      "_args": ["-y", "@playwright/mcp@latest"]
     }
   }
 }
