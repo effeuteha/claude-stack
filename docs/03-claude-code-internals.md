@@ -1,6 +1,6 @@
-# Claude Code Internals
+# 03 — Claude Code Internals
 
-Understanding how Claude Code loads configuration and manages memory is critical for effective use. Misunderstanding these mechanics is the #1 cause of "why isn't Claude following my rules?"
+Understanding how Claude Code loads configuration, memory, and extensions is load-bearing. Misunderstanding these mechanics is the #1 cause of "why isn't Claude following my rules?"
 
 ## CLAUDE.md Loading Mechanics
 
@@ -31,55 +31,33 @@ Filesystem root (/)
                            +-- CLAUDE.md     <-- LAZY: only when touching backend/ files
 ```
 
-### Three Rules
+### Three rules
 
-1. **Ancestor loading (UP)** — Claude walks upward from CWD to root, loading every CLAUDE.md. Immediate at startup.
-2. **Descendant loading (DOWN)** — CLAUDE.md in subdirectories are lazily loaded only when Claude reads/edits files in that directory.
+1. **Ancestor loading (UP)** — Claude walks upward from CWD to root, loading every `CLAUDE.md`. Immediate at startup.
+2. **Descendant loading (DOWN)** — `CLAUDE.md` in subdirectories are lazily loaded only when Claude reads/edits files in that directory.
 3. **Siblings never load** — Working in `frontend/` will never load `backend/CLAUDE.md`.
 
-### Practical Implications
+### Practical implications
 
-- Put universal rules in root CLAUDE.md (architecture, conventions, security)
-- Put component-specific rules in component CLAUDE.md files (frontend patterns, API conventions)
-- Use `.claude/rules/*.md` to split a large root CLAUDE.md into modular files (see [examples](../examples/rules/))
-- Use `CLAUDE.local.md` (gitignored) for personal preferences
-- Target: **under 200 lines** per CLAUDE.md file
+- Put universal rules in root `CLAUDE.md` (architecture, conventions, security).
+- Put component-specific rules in component `CLAUDE.md` files (frontend patterns, API conventions).
+- Use `.claude/rules/*.md` to split a large root `CLAUDE.md` into modular files (see [examples](../examples/rules/)).
+- Use `CLAUDE.local.md` (gitignored) for personal preferences.
+- Target: **under 200 lines** per `CLAUDE.md` file.
 - After correcting Claude, say: *"Update your CLAUDE.md so you don't make that mistake again."* Claude is effective at writing rules for itself.
 
-## Memory Hierarchy (4 Systems)
+## Memory systems (pointer)
 
-| System | Who Writes | Who Reads | Scope | Persists |
-|--------|-----------|-----------|-------|----------|
-| **CLAUDE.md** | Human (manual) | Main Claude + all agents | Project (git-tracked) | Yes |
-| **Auto-memory** | Claude (automatic) | Main Claude only | Per-project, per-user | Yes |
-| **`/memory` command** | Human (via editor) | Main Claude only | Per-project, per-user | Yes |
-| **Agent memory** | Agent itself | That specific agent only | Configurable | Yes |
+The stack has **six** memory mechanisms; `CLAUDE.md` is one of them. See [09 Memory Systems](09-memory-systems.md) for the full comparison table (scope, persistence, invocation, use).
 
-With MCP servers, you get additional persistence:
-- **Serena memories** — persist across all conversations, good for deep domain knowledge
-- **GSD `.planning/` files** — git-tracked project state (plans, summaries, verification reports)
+At a glance:
+- **`CLAUDE.md` / `CLAUDE.local.md`** — project-level rules, auto-loaded.
+- **Auto-memory** (`~/.claude/projects/…/memory/`) — cross-session, per-cwd, written automatically by Claude.
+- **Serena memories** — per-project, explicit via the Serena MCP tool.
+- **GSD state** (`.planning/`) — workflow artifacts, git-tracked in your project.
+- **`remember` plugin** (`.remember/`) — session continuity buffer.
 
-### When to Use Which
-
-| Need | Use |
-|------|-----|
-| Team conventions, architecture rules | CLAUDE.md (committed) |
-| Personal preferences | CLAUDE.local.md (gitignored) |
-| Let Claude learn from corrections | Auto-memory (automatic) |
-| Manually store context for later | `/memory` command |
-| Domain knowledge for specialized agents | Agent memory |
-| Non-obvious patterns, debugging insights | Serena memories |
-| Project lifecycle state | GSD `.planning/` |
-
-### Agent Memory
-
-Introduced in Claude Code v2.1.33. The first 200 lines of an agent's `MEMORY.md` are injected into its system prompt at startup. Three scopes:
-
-- **`user`** (recommended default) — cross-project, personal
-- **`project`** — team-shared, version controlled
-- **`local`** — personal, gitignored
-
-## Settings Hierarchy (6 Priority Levels)
+## Settings hierarchy (6 priority levels)
 
 ```
 1. Managed settings (organization-enforced)         <-- HIGHEST PRIORITY
@@ -101,7 +79,72 @@ Result:                    DENIED — deny always wins, regardless of priority l
 
 See [examples/settings.json](../examples/settings.json) for a team-ready configuration.
 
-## Command vs Skill vs Subagent
+## Useful env vars
+
+Set in `.claude/settings.json` under `env`, or in `~/.claude/settings.json` for global defaults.
+
+| Var | Values | Effect |
+|---|---|---|
+| `CLAUDE_CODE_EFFORT_LEVEL` | `low` / `medium` / `high` / `max` | Tunes reasoning depth on each turn; higher = more thinking, more tokens |
+| `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING` | `0` / `1` | `1` pins effort at the configured level instead of adapting to task complexity |
+| `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` | integer 1–99 | Triggers auto-compact at this % of context window (default ~75) |
+
+Example:
+```json
+{
+  "env": {
+    "CLAUDE_CODE_EFFORT_LEVEL": "high",
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "80"
+  }
+}
+```
+
+## Extensions: Commands, Skills, Subagents, Plugins, MCPs
+
+Five kinds of extension live in the Claude Code ecosystem — each solves a different problem.
+
+### Commands
+
+Files in `.claude/commands/`. User-invoked via `/` slash. Run inline in the main conversation.
+
+### Skills
+
+Files in `.claude/skills/`. Can auto-trigger based on context (skill description matches the task), or user-invoked via `/`. Reshape behavior for a specific task shape.
+
+### Subagents
+
+Files in `.claude/agents/`. Run in a separate context, autonomous. Invoked by the orchestrator Claude when the task matches the agent's description. Have their own memory, hooks, and tools.
+
+### Plugins
+
+Bundle commands + skills + agents + hooks + MCPs under one installable package. Current stack plugins:
+
+- **Superpowers** — discipline methodology (14 skills: `brainstorming`, `writing-plans`, `executing-plans`, `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `subagent-driven-development`, `dispatching-parallel-agents`, `using-git-worktrees`, `requesting-code-review`, `receiving-code-review`, `finishing-a-development-branch`, `writing-skills`, `using-superpowers`). See [02 Discipline Layer](02-discipline-layer.md).
+- **GSD** — project lifecycle management (~79 commands).
+- **SuperClaude** — strategic thinking (~33 commands under `/sc:*`).
+- **`feature-dev`** — guided feature development.
+- **`frontend-design`** — production-grade UI component generation.
+- **`code-review`** — standalone code review agent.
+- **`claude-md-management`** — `CLAUDE.md` audits.
+- **`claude-code-setup`** — automation recommender (hooks, skills, MCPs).
+- **`remember`** — per-session continuity buffer.
+- **`ralph-loop`** — run-loop automation.
+- **`graphify`** — input-to-knowledge-graph.
+
+See [Tool Inventory](../reference/tool-inventory.md) for the tiered catalog.
+
+### MCPs (Model Context Protocol servers)
+
+External servers that extend Claude Code with domain-specific tools. Current stack:
+
+- **Serena** — semantic code intelligence (symbol navigation, memories).
+- **Context7** — live library documentation.
+- **Playwright** — browser automation.
+- **Sequential Thinking** — structured multi-step reasoning.
+- **Hugging Face** — model / paper / space search.
+- **Gmail / Calendar / Drive** — Google Workspace bridges.
+
+### Command vs Skill vs Subagent — decision table
 
 | | Command | Skill | Subagent |
 |---|---|---|---|
@@ -115,7 +158,7 @@ See [examples/settings.json](../examples/settings.json) for a team-ready configu
 | **Can preload skills** | No | No | Yes (`skills:` frontmatter) |
 | **Has MCP servers** | No | No | Yes |
 
-### Decision Tree
+### Decision tree
 
 ```
 Is it triggered by the user typing "/"?
@@ -127,7 +170,7 @@ Is it triggered by the user typing "/"?
     NO  --> It's probably just CLAUDE.md instructions
 ```
 
-### Orchestration Pattern
+### Orchestration pattern
 
 ```
 User triggers /command
@@ -137,9 +180,9 @@ User triggers /command
     --> Command invokes Skill (inline, for output generation)
 ```
 
-## Useful Hooks
+## Useful hooks
 
-### Auto-Format After Edits
+### Auto-format after edits
 
 ```json
 {
@@ -152,7 +195,7 @@ User triggers /command
 }
 ```
 
-### Auto-Lint
+### Auto-lint
 
 ```json
 {
@@ -165,9 +208,9 @@ User triggers /command
 }
 ```
 
-See [examples/hooks/](../examples/hooks/) for ready-to-use hook configurations. Configure hooks via `/update-config` or directly in settings.json.
+See [examples/hooks/](../examples/hooks/) for ready-to-use hook configurations. Configure hooks via `/update-config` or directly in `settings.json`.
 
-## Permission Wildcards
+## Permission wildcards
 
 Reduce permission fatigue by pre-approving common operations in `.claude/settings.json`:
 
