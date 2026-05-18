@@ -81,19 +81,30 @@ See [04 Context Discipline](04-context-discipline.md) for the full story on when
 /gsd:pause-work                           # If mid-phase, leave a handoff
 /sc:git                                   # Commit and push
 /claude-md-management:revise-claude-md    # Update CLAUDE.md with session learnings
-/gsd:session-report                       # Generate session summary (token usage, outcomes)
+/gsd:stats                                # Project statistics: phases, plans, git metrics, timeline
+/gsd:milestone-summary                    # Comprehensive milestone summary (run when closing a milestone)
+/gsd:extract-learnings                    # Pull decisions / lessons / surprises from completed phases
 ```
 
-`/gsd:session-report` is useful for retrospectives — shows what actually got done, estimated token spend, and outcome summary. Run it at the end of long or milestone-closing sessions.
+For retrospectives at milestone boundaries, pair `/gsd:milestone-summary` with `/gsd:extract-learnings` — the summary captures *what* shipped, the learnings capture *what was surprising*. For mid-flight check-ins, `/gsd:stats` and `/gsd:progress` are lighter alternatives.
 
 ## GSD configuration
 
+Model and workflow configuration is interactive. Pick the right surface:
+
 ```
-/gsd:settings                             # Interactive config (agents, mode)
-/gsd:set-profile quality                  # Opus everywhere (max quality)
-/gsd:set-profile balanced                 # Opus planning, Sonnet execution (default)
-/gsd:set-profile budget                   # Sonnet writing, Haiku research
-/gsd:set-profile inherit                  # Use parent model for all agents
+/gsd:config                               # Workflow toggles, integrations, model profile (broad)
+/gsd:settings                             # Workflow toggles + model profile (narrower)
+/gsd:surface                              # Which skill clusters are surfaced in your menu
+```
+
+Profile semantics (set via `/gsd:config` or `/gsd:settings`):
+
+```
+quality      # Opus everywhere (max quality)
+balanced     # Opus planning, Sonnet execution (default)
+budget       # Sonnet writing, Haiku research
+inherit      # Use parent model for all agents
 ```
 
 ## Parallel development
@@ -108,7 +119,7 @@ Multiple sessions on the same project — see [10 Parallel Work](10-parallel-wor
   ```
   The Superpowers `using-git-worktrees` skill handles safety checks.
 - **`/gsd:workstreams`** — planning-level isolation within one repo.
-- **`/gsd:new-workspace`** — isolated repo copy + independent `.planning/`.
+- **`/gsd:workspace`** — isolated repo copy + independent `.planning/`.
 
 ### Agent teams (experimental)
 

@@ -66,10 +66,10 @@ Not every task needs the full phase lifecycle. Route tasks to the right workflow
 +-- EXPLORATORY / FEASIBILITY
 |   |
 |   +-- Validate a code approach before committing?
-|   |   YES --> /gsd:spike (throwaway code, wrap up with /gsd:spike-wrap-up)
+|   |   YES --> /gsd:spike (throwaway code; findings captured automatically at session end)
 |   |
 |   +-- Explore UI variants before ui-phase?
-|       YES --> /gsd:sketch (throwaway HTML mockups, wrap up with /gsd:sketch-wrap-up)
+|       YES --> /gsd:sketch (throwaway HTML mockups; findings captured automatically)
 |
 +-- PARALLEL WORK (2+ features in flight)
 |   YES --> git worktree + /gsd:workstreams (see Ch 10 Parallel Work)
@@ -97,20 +97,22 @@ Scale your AI quality and review effort based on task criticality:
 | Task Criticality | Planning | Execution | Review | Testing |
 |-----------------|----------|-----------|--------|---------|
 | **Spike / config / docs** | Skip or `/gsd:quick` | Direct implementation | None | None |
-| **Standard feature** | `/gsd:spec` + `/gsd:discuss` + `/gsd:plan` | `/gsd:execute-phase` | `/sc:spec-panel` | `/sc:test` |
+| **Standard feature** | `/gsd:spec-phase` + `/gsd:discuss-phase` + `/gsd:plan-phase` | `/gsd:execute-phase` | `/sc:spec-panel` | `/sc:test` |
 | **Critical feature** | Spec + discuss + plan + `/sc:spec-panel` | `/gsd:execute-phase` + careful review | `/code-review:code-review` | `/sc:test` + E2E |
 | **Production core** | Spec + discuss + plan + `/sc:spec-panel` + `/gsd:review` (cross-AI) | `/gsd:execute-phase` with verification | Multi-reviewer + `/gsd:validate-phase` | Full suite + mutation testing |
 
 ### GSD Model Profiles
 
-Match AI quality to task criticality:
+Match AI quality to task criticality. Profiles are configured interactively via `/gsd:config` (broad — toggles + integrations + model profile) or `/gsd:settings` (narrower — toggles + model profile). The profile semantics:
 
 ```
-/gsd:set-profile budget      # Sonnet writing, Haiku research (spikes, config)
-/gsd:set-profile balanced    # Opus planning, Sonnet execution (standard work)
-/gsd:set-profile quality     # Opus everywhere (critical features)
-/gsd:set-profile inherit     # Use parent model (max consistency)
+budget      # Sonnet writing, Haiku research (spikes, config)
+balanced    # Opus planning, Sonnet execution (standard work)
+quality     # Opus everywhere (critical features)
+inherit     # Use parent model (max consistency)
 ```
+
+`/gsd:surface` is a separate command for *skill cluster* profiles — which GSD skills are surfaced in your menu (not which model runs them).
 
 ## Quick Decision: Which Command?
 
@@ -136,7 +138,7 @@ Match AI quality to task criticality:
 | Review a plan (in-Claude) | `/sc:spec-panel .planning/…` |
 | Review a plan (cross-AI) | `/gsd:review .planning/…` |
 | Ship the phase | `/gsd:ship` |
-| I don't know which command | `/gsd:do "description"` or `/sc:recommend` |
+| I don't know which command | `/gsd:progress "description"` or `/sc:recommend` |
 
 ---
 

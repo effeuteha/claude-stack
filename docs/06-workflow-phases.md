@@ -102,23 +102,16 @@ See [04 Context Discipline](04-context-discipline.md) for token management detai
 
 Creates `DISCUSS.md`. Adaptive questioning — by the end, the planner has enough context that mechanical planning is possible.
 
-### Surface assumptions first (optional but often worth the 2 minutes)
+### Research happens automatically inside `/gsd:plan-phase`
+
+The planner spawns a researcher subagent (`gsd-phase-researcher`) that surfaces ecosystem patterns, best practices, and assumption-level questions inline. You no longer need to call a separate `research-phase` or `list-phase-assumptions` command — the planner does both as part of its work.
+
+For library-specific queries during planning or execution, reach for these directly:
 
 ```
-/gsd:list-phase-assumptions N
-```
-
-Course-correct misunderstandings before plan generation. No files created — conversational only.
-
-### Research if the domain is specialized
-
-```
-/gsd:research-phase N                # Ecosystem-level research
-Context7: resolve-library-id -> query-docs    # Library-specific
+Context7: resolve-library-id -> query-docs    # Live library docs
 /sc:research --c7 "specific technical query"  # Combined web + docs
 ```
-
-Use `gsd:research-phase` for ecosystem/best-practice questions; use Context7 when you need up-to-date API docs for a specific library.
 
 ---
 
@@ -199,8 +192,8 @@ For one-shot work that doesn't warrant the full lifecycle:
 /sc:implement "feature description"
 /feature-dev:feature-dev "feature description"
 /gsd:quick
-/gsd:do "natural language description"     # Auto-routes to the right command
-/gsd:fast                                   # Single-line fixes, skip planning entirely
+/gsd:progress "natural language description"  # Auto-routes freeform intent (unified situational command)
+/gsd:fast                                     # Single-line fixes, skip planning entirely
 ```
 
 ---
@@ -220,7 +213,7 @@ For source-file review tied to a phase:
 
 ```
 /gsd:code-review                            # Review files changed during the phase
-/gsd:code-review-fix                        # Auto-fix findings from REVIEW.md
+/gsd:code-review --fix                      # Same review, then auto-apply mechanical findings
 /code-review:code-review                    # Standalone fresh-context PR review
 ```
 
@@ -293,8 +286,10 @@ Creates the PR, runs code review, prepares the commit chain for merge. Replaces 
 When a milestone (not just a phase) is done:
 
 ```
-/gsd:audit-milestone                        # Audit completion against original intent
-/gsd:plan-milestone-gaps                    # Create phases for any gaps
+/gsd:audit-milestone                        # Audit completion against original intent (surfaces gaps)
+/gsd:audit-uat                              # Cross-phase audit of outstanding UAT items
+/gsd:milestone-summary                      # Generate team-facing summary for onboarding/review
+/gsd:extract-learnings                      # Pull decisions, lessons, surprises from phase artifacts
 /gsd:complete-milestone 1.0.0               # Archive + git tag
 /sc:git                                     # Push tags, clean git state
 /claude-md-management:revise-claude-md      # Update CLAUDE.md with session learnings
@@ -322,13 +317,25 @@ For AI/LLM feature phases. Produces `AI-SPEC.md` with framework selection, evalu
 
 For frontend phases. Produces `UI-SPEC.md` design contract. Pairs with the `frontend-design` plugin for generation and `/gsd:ui-review` for the 6-pillar post-implementation audit.
 
+### `/gsd:mvp-phase`
+
+Plans a phase as a *vertical MVP slice* — a thin end-to-end implementation chosen with SPIDR splitting (Spike / Path / Interfaces / Data / Rules). The output is a user story plus a plan-phase invocation scoped to the slice. Use when a phase is larger than one focused sitting; the MVP slice ships first, follow-ups become their own phases.
+
 ### `/gsd:sketch`
 
-Throwaway UI exploration — multi-variant HTML mockups before committing to a real `ui-phase`. Pair with `/gsd:sketch-wrap-up` to package findings into a persistent skill once a direction is chosen.
+Throwaway UI exploration — multi-variant HTML mockups before committing to a real `ui-phase`. Findings are packaged automatically into a persistent skill at the end of the sketch session.
 
 ### `/gsd:spike`
 
-Throwaway code experiments to validate feasibility before planning. Pair with `/gsd:spike-wrap-up` to capture findings.
+Throwaway code experiments to validate feasibility before planning. Findings are captured automatically at the end of the spike session.
+
+### `/gsd:secure-phase`
+
+Retroactive threat-mitigation audit for a completed phase — verifies the threat model from `PLAN.md` was actually implemented. Produces `SECURITY.md`. Pair with security-sensitive phases as a post-execution gate.
+
+### `/gsd:eval-review`
+
+Retroactive coverage audit for an AI-integration phase — scores each eval dimension from `AI-SPEC.md` as COVERED / PARTIAL / MISSING and produces `EVAL-REVIEW.md`. The post-execution counterpart to `/gsd:ai-integration-phase`.
 
 ---
 
@@ -342,7 +349,8 @@ Throwaway code experiments to validate feasibility before planning. Pair with `/
 | Frontend phase | `/gsd:ui-phase` (adds design contract) |
 | Explore feasibility before planning | `/gsd:spike` |
 | Explore UI variants before `ui-phase` | `/gsd:sketch` |
-| Urgent insert into a live roadmap | `/gsd:insert-phase` (decimal phase N.1) |
+| Urgent insert into a live roadmap | `/gsd:phase insert` (decimal phase N.1) |
+| Phase too big to plan as one slice | `/gsd:mvp-phase` (SPIDR splitting, vertical MVP first) |
 
 ---
 

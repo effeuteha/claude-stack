@@ -29,8 +29,8 @@
 ## The "I Don't Know Which Command" Path
 
 ```bash
-/gsd:do "natural language description"    # GSD auto-routes
-/sc:recommend "what I want to do"         # SC recommends
+/gsd:progress "natural language description"   # GSD auto-routes freeform intent
+/sc:recommend "what I want to do"               # SC recommends
 ```
 
 ## Specialized Phase Types
@@ -40,7 +40,8 @@
 /gsd:ui-phase N                           # Frontend: UI-SPEC.md design contract
 /gsd:sketch                               # Throwaway UI variants (multi-HTML)
 /gsd:spike                                # Throwaway code experiments
-/gsd:insert-phase N "urgent"              # Decimal phase N.1 for mid-milestone inserts
+/gsd:phase insert N "urgent"              # Decimal phase N.1 for mid-milestone inserts
+/gsd:mvp-phase N                          # Plan as MVP vertical slice (SPIDR splitting)
 ```
 
 ## SC Flags
@@ -62,17 +63,24 @@
 
 ## GSD Model Profiles
 
+Model profiles (budget / balanced / quality / inherit) are configured interactively:
+
 ```
-/gsd:set-profile budget      # Sonnet + Haiku (spikes, config)
-/gsd:set-profile balanced    # Opus + Sonnet (standard work, default)
-/gsd:set-profile quality     # Opus everywhere (critical)
-/gsd:set-profile inherit     # Use parent model
+/gsd:config           # Workflow toggles, integrations, model profile
+/gsd:settings         # Workflow toggles + model profile (narrower)
+/gsd:surface          # Skill cluster profile (which skills are surfaced)
 ```
+
+Profile semantics:
+- **budget** — Sonnet writing, Haiku research (spikes, config)
+- **balanced** — Opus planning, Sonnet execution (standard work, default)
+- **quality** — Opus everywhere (critical features)
+- **inherit** — Use parent model (max consistency)
 
 ## Decision Tree
 
 ```
-Don't know which tool?                  -> /gsd:do or /sc:recommend
+Don't know which tool?                  -> /gsd:progress "intent" or /sc:recommend
 Need to think about WHAT to build?      -> SC (brainstorm, business-panel, research)
   or, lock the WHAT:                    -> /gsd:spec-phase
 Need two AI models to debate it?        -> Mysti Brainstorm (Debate/Red-Team)
@@ -98,9 +106,9 @@ Need to POST-MORTEM a failed workflow?  -> /gsd:forensics
 Need a QUICK one-off task?              -> GSD (quick) or SC (task)
 Single-line fix?                        -> /gsd:fast
 Need to REVIEW a PR?                    -> /code-review:code-review
-Need phase-scoped code review?          -> /gsd:code-review (+ /gsd:code-review-fix)
+Need phase-scoped code review?          -> /gsd:code-review (add --fix to auto-apply)
 Need to BUILD UI?                       -> frontend-design:frontend-design + /gsd:ui-phase
-Need to CAPTURE an idea?                -> GSD (note, add-todo, plant-seed, add-backlog)
+Need to CAPTURE an idea?                -> /gsd:capture (notes, todos, seeds, backlog — unified)
 Need to PAUSE and resume later?         -> /gsd:pause-work ... /gsd:resume-work
 Need named cross-session threads?       -> /gsd:thread
 Need lightweight session continuity?    -> /remember

@@ -31,7 +31,8 @@ See `../assets/golden-path.svg` for the visual.
 | Frontend phase | `/gsd:ui-phase` |
 | Explore feasibility (code) | `/gsd:spike` |
 | Explore UI variants | `/gsd:sketch` |
-| Urgent insert into live roadmap | `/gsd:insert-phase` (decimal phase N.1) |
+| Urgent insert into live roadmap | `/gsd:phase` insert (decimal phase N.1) |
+| MVP slice of a larger phase | `/gsd:mvp-phase` (SPIDR splitting + story) |
 
 ## Review branch logic
 

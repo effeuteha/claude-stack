@@ -15,8 +15,8 @@ Your codebase knowledge goes stale as you build. This chapter is about keeping t
 | **Before milestone audit** | `/gsd:map-codebase` | Auditor needs current state |
 | **After adding new integrations** | `/gsd:map-codebase` | `INTEGRATIONS.md` needs updating |
 | **When planning touches unfamiliar areas** | Serena `get_symbols_overview` | Targeted understanding |
-| **When context window is tight** | `/sc:index-repo` or `/gsd:scan` | Big token savings |
-| **Quick project assessment** | `/gsd:scan` | Lightweight alternative to full map |
+| **When context window is tight** | `/sc:index-repo` | Big token savings (3 KB vs 58 KB) |
+| **Quick project assessment** | Serena `get_symbols_overview` | Targeted scope; doesn't require a full map |
 
 ## Codebase mapping — four tools
 
@@ -47,21 +47,20 @@ Creates `PROJECT_INDEX.md` + `.json` — one compact file (~3 KB) that replaces 
 
 **Update:** when structure changes significantly.
 
-### `/gsd:scan` — lightweight rapid assessment
+### `/gsd:ns-context` — the codebase-intelligence cluster landing page
 
-A lighter alternative to `/gsd:map-codebase` when you want a quick read rather than the deep seven-document analysis. Produces a condensed summary.
-
-**Best for:** first look at an unfamiliar repo; spot-check before a small change.
-
-### `/gsd:intel` — query, inspect, refresh
-
-Once codebase intelligence files exist in `.planning/codebase/`, `/gsd:intel` queries them in place or refreshes a single document:
+Once intel exists under `.planning/codebase/`, the work splits across a few commands rather than one umbrella `intel` verb. `/gsd:ns-context` is the namespace page that surfaces them:
 
 ```
-/gsd:intel query "how does auth work"        # Ask the intel files a question
-/gsd:intel refresh ARCHITECTURE              # Re-run just one document
-/gsd:intel inspect                           # Show what's in .planning/codebase/
+/gsd:ns-context                              # Landing page: map | graphify | docs | learnings
+/gsd:map-codebase                            # Re-run the deep mapper (regenerates all 7 docs)
+/gsd:map-codebase --focus ARCHITECTURE       # Re-run just one document
+/gsd:graphify                                # Build/query the project knowledge graph
+/gsd:docs-update                             # Generate or refresh project docs verified against code
+/gsd:extract-learnings                       # Pull decisions / lessons / surprises from phase artifacts
 ```
+
+To *query* the intel files, just read them — they're plain Markdown in `.planning/codebase/`. The old `/gsd:intel query` verb was replaced by direct reads (Serena's `read_file` or grep) because LLM-level question-answering over a few Markdown files turned out to be cheaper than dispatching a query agent.
 
 ## Knowledge graphs
 

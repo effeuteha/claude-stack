@@ -52,6 +52,16 @@ Dispatches the plan to **other AI CLIs** — Gemini CLI, Codex CLI, Copilot CLI,
 
 The philosophy: *persona shifts inside one model ≠ prior shifts across models.* When the stakes justify the cost, do both.
 
+### `/gsd:plan-review-convergence` — replan-until-clean loop
+
+When a cross-AI review surfaces non-trivial concerns, the convergence command runs the loop for you:
+
+```
+/gsd:plan-review-convergence .planning/phases/NN/PLAN.md
+```
+
+It re-plans with the review feedback and re-reviews, until no HIGH-severity concerns remain (or the cycle limit is hit). Use for high-stakes phases where you want the plan to settle before execution rather than catching issues mid-execute. Costs more tokens than a single review — reach for it when the cost of a bad plan is high.
+
 ## Post-implementation code review
 
 ### `/code-review:code-review` plugin — standalone fresh-context review
@@ -62,9 +72,9 @@ Runs on any git diff or PR. Dispatches multiple review agents in parallel, each 
 
 Reviews source files changed during a GSD phase. Produces `REVIEW.md` under the phase directory with severity-classified findings. Use as part of Phase 5 (Analyze) in the workflow.
 
-### `/gsd:code-review-fix` — auto-fix the findings
+### `/gsd:code-review --fix` — auto-fix the findings
 
-Spawns a fixer agent, reads `REVIEW.md`, applies intelligent fixes, and commits each fix atomically. Produces `REVIEW-FIX.md` summary. Use when the review found changes you trust to be mechanical (formatting, minor patterns, safe refactors).
+Same review pass, but the orchestrator also spawns a fixer subagent (`gsd-code-fixer`) that reads `REVIEW.md`, applies intelligent fixes, and commits each fix atomically. Use the `--fix` flag when the findings are mechanical (formatting, minor patterns, safe refactors) and you trust them to apply without human triage.
 
 ## `/gsd:audit-fix` — autonomous audit-to-fix
 
@@ -75,6 +85,19 @@ For follow-up quality work where you want an end-to-end cycle without per-step p
 ```
 
 Runs: find issues → classify severity → apply fixes → run tests → commit per fix. Use on a feature branch, not main. Good for sweeping a mature codebase for consistency issues or grinding through low-severity tech debt.
+
+## Retroactive phase audits — `/gsd:secure-phase`, `/gsd:eval-review`, `/gsd:audit-uat`, `/gsd:validate-phase`
+
+When a phase is already implemented and you want to verify it actually met its non-functional contract, reach for the retroactive auditors instead of redoing the plan:
+
+| Command | What it verifies | Output |
+|---|---|---|
+| `/gsd:secure-phase` | Threat mitigations from `PLAN.md` threat model are present in code | `SECURITY.md` |
+| `/gsd:eval-review` | AI-integration eval coverage matches `AI-SPEC.md` rubrics | `EVAL-REVIEW.md` (COVERED / PARTIAL / MISSING per dim) |
+| `/gsd:audit-uat` | UAT items outstanding across phases — cross-phase view | structured report |
+| `/gsd:validate-phase` | Test coverage and validation gaps the plan didn't prescribe | generated tests + coverage report |
+
+Use these *after* execute when you didn't pre-commit to the discipline in `PLAN.md`. They are intentionally retroactive — the audit reads what the plan promised and checks what the code delivered.
 
 ## Review targets — where to focus effort
 
@@ -136,10 +159,15 @@ The key insight: *the more uncorrelated review you throw at the problem, the mor
 |---|---|
 | `/sc:spec-panel` | Plan review before execute — multi-expert in Claude |
 | `/gsd:review` | Plan review before execute — cross-AI, different models |
+| `/gsd:plan-review-convergence` | Replan-with-review loop until no HIGH concerns remain |
 | `/code-review:code-review` | Post-implementation PR review — 5 parallel review agents |
 | `/gsd:code-review` | Phase-scoped review of changed source files |
-| `/gsd:code-review-fix` | Auto-fix mechanical findings from phase review |
+| `/gsd:code-review --fix` | Same review + auto-apply mechanical findings |
 | `/gsd:audit-fix` | Autonomous audit-to-fix pipeline for follow-up work |
+| `/gsd:secure-phase` | Retroactive threat-mitigation audit |
+| `/gsd:eval-review` | Retroactive AI eval coverage audit |
+| `/gsd:audit-uat` | Cross-phase UAT outstanding-items audit |
+| `/gsd:validate-phase` | Retroactive test/coverage gap fill |
 | Mysti Brainstorm (Red-Team) | Adversarial review between two models (GUI) |
 | `/sc:analyze --think-hard` | Deep self-review within same context |
 | Second Claude Code session | Independent QA in a separate terminal tab |

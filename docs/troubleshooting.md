@@ -57,11 +57,12 @@ Common problems and how to fix them.
 
 **Fixes:**
 
-1. **Wrong model profile** — Check with `/gsd:settings`. Use `quality` for critical work:
+1. **Wrong model profile** — Check and change with `/gsd:settings` or the broader `/gsd:config`. Pick `quality` for critical work:
    ```
-   /gsd:set-profile quality     # Opus everywhere
-   /gsd:set-profile balanced    # Opus planning, Sonnet execution (default)
+   /gsd:settings                # Interactive: workflow toggles + model profile
+   /gsd:config                  # Broader: also covers integrations and advanced knobs
    ```
+   Profile semantics: `quality` (Opus everywhere) · `balanced` (Opus planning, Sonnet execution — default) · `budget` (Sonnet/Haiku) · `inherit` (use parent model).
 
 2. **Missing context** — Did you skip `/gsd:discuss-phase`? The planner needs your vision.
 
@@ -187,7 +188,7 @@ Commit this file so your whole team benefits. Use `settings.local.json` for pers
 
 3. **Accept and move on** — some ambiguity is inherent; rather than fighting it, write it as an explicit open question in `SPEC.md` and resolve in `discuss-phase`.
 
-4. **Break the phase** — a phase with high ambiguity across 4+ requirements is often two phases that got conflated. Use `/gsd:remove-phase` and `/gsd:add-phase` to split.
+4. **Break the phase** — a phase with high ambiguity across 4+ requirements is often two phases that got conflated. Use `/gsd:phase` (consolidated CRUD: add / insert / remove / edit) to split, or `/gsd:mvp-phase` to vertically slice the current phase into an MVP plus follow-ups.
 
 ---
 
@@ -275,8 +276,8 @@ That's 5 commands. Everything else is optional enhancement. See the [Stack Profi
 
 Or use the routing commands:
 ```bash
-/gsd:do "what you want to do"    # GSD picks the right command
-/sc:recommend "what you want"     # SC recommends the best approach
+/gsd:progress "what you want to do"  # Unified situational command: routes freeform intent
+/sc:recommend "what you want"         # SC recommends the best approach
 ```
 
 ---

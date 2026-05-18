@@ -69,7 +69,7 @@ For exploratory UI work before committing to a spec:
 
 ```
 /gsd:sketch                               # Multi-variant HTML mockups (throwaway)
-/gsd:sketch-wrap-up                       # Package findings as a project skill
+                                          # Findings packaged automatically at session end
 ```
 
 With Playwright for automated visual checks:
@@ -82,19 +82,20 @@ Playwright: browser_take_screenshot       # Visual verification
 
 ## Idea capture
 
+The narrow capture verbs (`/gsd:note`, `/gsd:add-todo`, `/gsd:plant-seed`, `/gsd:add-backlog`) consolidated into a single unified command:
+
 ```
-/gsd:note "raw idea or thought"           # Zero-friction capture (append / list / promote)
-/gsd:add-todo "actionable task"           # Directly to todo list
-/gsd:add-backlog "999.x parking lot"      # Lower-priority items
-/gsd:plant-seed "forward-looking idea"    # Surfaces at the right milestone via trigger
-/gsd:check-todos                          # Review when ready
-/gsd:review-backlog                       # Promote backlog to active milestone
+/gsd:capture "raw idea, todo, seed, or backlog item"
+                                          # Routes to the right destination automatically
+/gsd:explore                              # Socratic ideation when an idea needs to be unpacked
+/gsd:review-backlog                       # Promote backlog items to the active milestone
+/gsd:progress                             # Check what's outstanding (replaces check-todos)
 ```
 
 ## Urgent mid-milestone work
 
 ```
-/gsd:insert-phase 5 "Critical fix"       # Creates phase 5.1
+/gsd:phase insert 5 "Critical fix"        # Creates phase 5.1 (consolidated CRUD)
 /gsd:plan-phase 5.1
 /gsd:execute-phase 5.1
 ```

@@ -78,7 +78,7 @@ See the [end-to-end walkthrough](docs/walkthrough-api-feature.md) for a real fea
 ### Thinking & Planning
 
 ```
-Don't know which tool?                 -> /gsd:do "description" (auto-routes)
+Don't know which tool?                 -> /gsd:progress "description" (auto-routes freeform intent)
 Brainstorm an idea                     -> /sc:brainstorm or /superpowers:brainstorming
 Research a domain or market            -> /sc:research
 Research a specific library            -> Context7 query-docs
@@ -111,7 +111,7 @@ Run tests                              -> /sc:test
 Verify phase deliverables              -> /gsd:verify-work N
 Review a PR                            -> /code-review:code-review
 Review source files for a phase        -> /gsd:code-review
-Auto-fix code review findings          -> /gsd:code-review-fix
+Auto-fix code review findings          -> /gsd:code-review --fix
 Autonomous audit -> fix pipeline       -> /gsd:audit-fix
 Debug a complex bug                    -> /gsd:debug "description"
 Post-mortem a failed workflow          -> /gsd:forensics

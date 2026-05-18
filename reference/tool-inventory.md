@@ -25,7 +25,7 @@ Each entry carries: *what it is* · *one-line value* · *when to use* · *comman
 - **What it is:** Project lifecycle management — spec → discuss → plan → execute → verify → ship.
 - **Value:** Turns vague requests into atomic, committed artifacts with a traceable history.
 - **When:** Any non-trivial feature or phase.
-- **Commands (~79):** `/gsd:progress`, `/gsd:spec-phase`, `/gsd:discuss-phase`, `/gsd:plan-phase`, `/gsd:execute-phase`, `/gsd:verify-work`, `/gsd:ship`, `/gsd:autonomous`, `/gsd:quick`, `/gsd:fast`, `/gsd:debug`, `/gsd:forensics`, `/gsd:audit-fix`, `/gsd:ai-integration-phase`, `/gsd:ui-phase`, `/gsd:sketch`, `/gsd:spike`, `/gsd:workstreams`, `/gsd:thread`, `/gsd:review`, `/gsd:map-codebase`, `/gsd:scan`, `/gsd:intel`, `/gsd:graphify`, `/gsd:pause-work`, `/gsd:resume-work`, `/gsd:session-report`, `/gsd:ship`, `/gsd:do`, `/gsd:help`, … (full list: `/gsd:help`)
+- **Commands (~85):** `/gsd:progress` (situational dispatcher), `/gsd:spec-phase`, `/gsd:discuss-phase`, `/gsd:plan-phase`, `/gsd:execute-phase`, `/gsd:verify-work`, `/gsd:ship`, `/gsd:autonomous`, `/gsd:quick`, `/gsd:fast`, `/gsd:debug`, `/gsd:forensics`, `/gsd:audit-fix`, `/gsd:ai-integration-phase`, `/gsd:ui-phase`, `/gsd:mvp-phase`, `/gsd:sketch`, `/gsd:spike`, `/gsd:phase` (CRUD), `/gsd:capture`, `/gsd:explore`, `/gsd:workstreams`, `/gsd:workspace`, `/gsd:thread`, `/gsd:review`, `/gsd:plan-review-convergence`, `/gsd:code-review` (`--fix`), `/gsd:secure-phase`, `/gsd:audit-uat`, `/gsd:eval-review`, `/gsd:map-codebase`, `/gsd:graphify`, `/gsd:ns-context`, `/gsd:docs-update`, `/gsd:extract-learnings`, `/gsd:milestone-summary`, `/gsd:import`, `/gsd:manager`, `/gsd:pr-branch`, `/gsd:pause-work`, `/gsd:resume-work`, `/gsd:stats`, `/gsd:health`, `/gsd:config`, `/gsd:settings`, `/gsd:surface`, `/gsd:help`, … (full list: `/gsd:help`)
 - **Pairs with:** Superpowers (discipline wraps every call), SuperClaude (strategy feeds plan).
 
 ### SuperClaude
@@ -79,7 +79,7 @@ Each entry carries: *what it is* · *one-line value* · *when to use* · *comman
 - **Value:** Independent second-eye review, uncorrelated from the agent that wrote the code.
 - **When:** Before merging any significant change; after a major feature step.
 - **Trigger:** `/code-review:code-review`.
-- **Pairs with:** `/gsd:code-review` (phase-scoped), `/gsd:code-review-fix` (auto-fix findings).
+- **Pairs with:** `/gsd:code-review` (phase-scoped); add `--fix` to auto-apply mechanical findings.
 
 ### `claude-md-management` plugin
 - **What it is:** `CLAUDE.md` audit and improvement skills.
@@ -155,7 +155,7 @@ Each entry carries: *what it is* · *one-line value* · *when to use* · *comman
 
 | Layer | Count |
 |---|---|
-| GSD commands | ~79 |
+| GSD commands | ~85 |
 | SuperClaude commands | ~33 |
 | Superpowers skills | 14 |
 | Claude Code native (update-config, keybindings-help, loop, schedule, simplify, fewer-permission-prompts) | ~6 |

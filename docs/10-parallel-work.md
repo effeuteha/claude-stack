@@ -19,7 +19,7 @@ Parallelism costs attention. Every mechanism below adds a dimension (a second ch
 - **Cost:** cognitive — you're shepherding multiple workstreams at once.
 - **Use for:** larger projects with teams, or solo work juggling unrelated feature areas concurrently.
 - **Commands:** `/gsd:workstreams list|create|switch|status|progress|complete|resume`.
-- **Optional pairing:** `/gsd:new-workspace` creates an isolated workspace with repo copies and an independent `.planning/` — use this when even the planning artifacts shouldn't mingle.
+- **Optional pairing:** `/gsd:workspace` creates and manages isolated workspaces with repo copies and an independent `.planning/` — use this when even the planning artifacts shouldn't mingle.
 
 ### 3. GSD threads (persistent conversational context)
 
@@ -51,7 +51,7 @@ Need parallelism in WHAT dimension?
 
   Planning (multiple phases in flight)?
     -> /gsd:workstreams (same repo)
-    -> /gsd:new-workspace (isolated copy + independent .planning/)
+    -> /gsd:workspace (isolated copy + independent .planning/)
 
   Conversation (context that outlives a session)?
     -> /gsd:thread
