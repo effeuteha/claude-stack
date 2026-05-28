@@ -6,41 +6,41 @@ Every conversation is bounded — by context window, by attention span, by the o
 
 ```
 /sc:load                                  # Restore SC context from last session
-/gsd:resume-work                          # Restore GSD state from STATE.md
+/gsd-resume-work                          # Restore GSD state from STATE.md
 OR
-/gsd:progress                             # Check status and auto-route to next action
+/gsd-progress                             # Check status and auto-route to next action
 ```
 
 If `remember` plugin is installed, it will auto-load `.remember/now.md` into the conversation at session start — no explicit call needed.
 
-## Pause / resume — `/gsd:pause-work` and `/gsd:resume-work`
+## Pause / resume — `/gsd-pause-work` and `/gsd-resume-work`
 
 The canonical handoff pair.
 
 ```
-/gsd:pause-work                           # Snapshot current state to .continue-here
+/gsd-pause-work                           # Snapshot current state to .continue-here
 ```
 
 Produces a handoff document covering: what's done, what's partially done, what's next, what to know. Use this when you're mid-phase and need to stop — the snapshot captures the conversational context that `STATE.md` alone doesn't.
 
 ```
-/gsd:resume-work                          # Read .continue-here + STATE.md, restore context
+/gsd-resume-work                          # Read .continue-here + STATE.md, restore context
 ```
 
 Resumes from the handoff. Safe to run in a fresh session after `/clear`, or even in a new terminal days later.
 
-## Cross-session threads — `/gsd:thread`
+## Cross-session threads — `/gsd-thread`
 
 For persistent context threads that outlive a single `/clear`:
 
 ```
-/gsd:thread create "auth-rewrite"         # Name a new thread
-/gsd:thread switch "auth-rewrite"         # Resume context from this thread
-/gsd:thread list                          # See open threads
-/gsd:thread archive "old-thread"          # Done with it; archive
+/gsd-thread create "auth-rewrite"         # Name a new thread
+/gsd-thread switch "auth-rewrite"         # Resume context from this thread
+/gsd-thread list                          # See open threads
+/gsd-thread archive "old-thread"          # Done with it; archive
 ```
 
-Unlike `/gsd:pause-work` (which is one-shot), threads are *named, parallel context containers*. Use threads when you're juggling 2+ unrelated investigations that each need their own memory. See [10 Parallel Work](10-parallel-work.md) for the broader parallel-context story.
+Unlike `/gsd-pause-work` (which is one-shot), threads are *named, parallel context containers*. Use threads when you're juggling 2+ unrelated investigations that each need their own memory. See [10 Parallel Work](10-parallel-work.md) for the broader parallel-context story.
 
 ## `remember` plugin — session continuity buffer
 
@@ -65,11 +65,11 @@ See [09 Memory Systems](09-memory-systems.md) for how `remember` relates to the 
 When the context window is getting full:
 
 ```
-1. /gsd:pause-work                        # Snapshot current state
+1. /gsd-pause-work                        # Snapshot current state
 2. /sc:save                               # Persist SC context via Serena
 3. Serena: write_memory "key-insight"     # Save critical knowledge
 4. /clear                                 # Free context
-5. /gsd:resume-work                       # Restore in clean context
+5. /gsd-resume-work                       # Restore in clean context
 ```
 
 See [04 Context Discipline](04-context-discipline.md) for the full story on when to compact vs clear vs subagent.
@@ -78,27 +78,27 @@ See [04 Context Discipline](04-context-discipline.md) for the full story on when
 
 ```
 /sc:save                                  # Persist session context
-/gsd:pause-work                           # If mid-phase, leave a handoff
+/gsd-pause-work                           # If mid-phase, leave a handoff
 /sc:git                                   # Commit and push
 /claude-md-management:revise-claude-md    # Update CLAUDE.md with session learnings
-/gsd:stats                                # Project statistics: phases, plans, git metrics, timeline
-/gsd:milestone-summary                    # Comprehensive milestone summary (run when closing a milestone)
-/gsd:extract-learnings                    # Pull decisions / lessons / surprises from completed phases
+/gsd-stats                                # Project statistics: phases, plans, git metrics, timeline
+/gsd-milestone-summary                    # Comprehensive milestone summary (run when closing a milestone)
+/gsd-extract-learnings                    # Pull decisions / lessons / surprises from completed phases
 ```
 
-For retrospectives at milestone boundaries, pair `/gsd:milestone-summary` with `/gsd:extract-learnings` — the summary captures *what* shipped, the learnings capture *what was surprising*. For mid-flight check-ins, `/gsd:stats` and `/gsd:progress` are lighter alternatives.
+For retrospectives at milestone boundaries, pair `/gsd-milestone-summary` with `/gsd-extract-learnings` — the summary captures *what* shipped, the learnings capture *what was surprising*. For mid-flight check-ins, `/gsd-stats` and `/gsd-progress` are lighter alternatives.
 
 ## GSD configuration
 
 Model and workflow configuration is interactive. Pick the right surface:
 
 ```
-/gsd:config                               # Workflow toggles, integrations, model profile (broad)
-/gsd:settings                             # Workflow toggles + model profile (narrower)
-/gsd:surface                              # Which skill clusters are surfaced in your menu
+/gsd-config                               # Workflow toggles, integrations, model profile (broad)
+/gsd-settings                             # Workflow toggles + model profile (narrower)
+/gsd-surface                              # Which skill clusters are surfaced in your menu
 ```
 
-Profile semantics (set via `/gsd:config` or `/gsd:settings`):
+Profile semantics (set via `/gsd-config` or `/gsd-settings`):
 
 ```
 quality      # Opus everywhere (max quality)
@@ -118,8 +118,8 @@ Multiple sessions on the same project — see [10 Parallel Work](10-parallel-wor
   cd ../my-feature-worktree && claude
   ```
   The Superpowers `using-git-worktrees` skill handles safety checks.
-- **`/gsd:workstreams`** — planning-level isolation within one repo.
-- **`/gsd:workspace`** — isolated repo copy + independent `.planning/`.
+- **`/gsd-workstreams`** — planning-level isolation within one repo.
+- **`/gsd-workspace`** — isolated repo copy + independent `.planning/`.
 
 ### Agent teams (experimental)
 

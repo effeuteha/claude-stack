@@ -8,19 +8,19 @@ Your codebase knowledge goes stale as you build. This chapter is about keeping t
 
 | Trigger | Action | Why |
 |---|---|---|
-| **Project start (brownfield)** | `/gsd:map-codebase` + `/sc:index-repo` | Baseline understanding |
-| **After every 2–3 phases** | `/gsd:map-codebase` | Architecture may have shifted |
-| **After major refactors** | `/gsd:map-codebase` + `/sc:index-repo` | Structure has changed significantly |
+| **Project start (brownfield)** | `/gsd-map-codebase` + `/sc:index-repo` | Baseline understanding |
+| **After every 2–3 phases** | `/gsd-map-codebase` | Architecture may have shifted |
+| **After major refactors** | `/gsd-map-codebase` + `/sc:index-repo` | Structure has changed significantly |
 | **New session on large project** | `/sc:index-repo` (if stale) | Token-efficient session bootstrap |
-| **Before milestone audit** | `/gsd:map-codebase` | Auditor needs current state |
-| **After adding new integrations** | `/gsd:map-codebase` | `INTEGRATIONS.md` needs updating |
+| **Before milestone audit** | `/gsd-map-codebase` | Auditor needs current state |
+| **After adding new integrations** | `/gsd-map-codebase` | `INTEGRATIONS.md` needs updating |
 | **When planning touches unfamiliar areas** | Serena `get_symbols_overview` | Targeted understanding |
 | **When context window is tight** | `/sc:index-repo` | Big token savings (3 KB vs 58 KB) |
 | **Quick project assessment** | Serena `get_symbols_overview` | Targeted scope; doesn't require a full map |
 
 ## Codebase mapping — four tools
 
-### `/gsd:map-codebase` — deep parallel analysis
+### `/gsd-map-codebase` — deep parallel analysis
 
 Dispatches parallel mapper agents, each focused on one dimension, and writes documents directly to `.planning/codebase/`:
 
@@ -47,26 +47,26 @@ Creates `PROJECT_INDEX.md` + `.json` — one compact file (~3 KB) that replaces 
 
 **Update:** when structure changes significantly.
 
-### `/gsd:ns-context` — the codebase-intelligence cluster landing page
+### `/gsd-ns-context` — the codebase-intelligence cluster landing page
 
-Once intel exists under `.planning/codebase/`, the work splits across a few commands rather than one umbrella `intel` verb. `/gsd:ns-context` is the namespace page that surfaces them:
+Once intel exists under `.planning/codebase/`, the work splits across a few commands rather than one umbrella `intel` verb. `/gsd-ns-context` is the namespace page that surfaces them:
 
 ```
-/gsd:ns-context                              # Landing page: map | graphify | docs | learnings
-/gsd:map-codebase                            # Re-run the deep mapper (regenerates all 7 docs)
-/gsd:map-codebase --focus ARCHITECTURE       # Re-run just one document
-/gsd:graphify                                # Build/query the project knowledge graph
-/gsd:docs-update                             # Generate or refresh project docs verified against code
-/gsd:extract-learnings                       # Pull decisions / lessons / surprises from phase artifacts
+/gsd-ns-context                              # Landing page: map | graphify | docs | learnings
+/gsd-map-codebase                            # Re-run the deep mapper (regenerates all 7 docs)
+/gsd-map-codebase --focus ARCHITECTURE       # Re-run just one document
+/gsd-graphify                                # Build/query the project knowledge graph
+/gsd-docs-update                             # Generate or refresh project docs verified against code
+/gsd-extract-learnings                       # Pull decisions / lessons / surprises from phase artifacts
 ```
 
-To *query* the intel files, just read them — they're plain Markdown in `.planning/codebase/`. The old `/gsd:intel query` verb was replaced by direct reads (Serena's `read_file` or grep) because LLM-level question-answering over a few Markdown files turned out to be cheaper than dispatching a query agent.
+To *query* the intel files, just read them — they're plain Markdown in `.planning/codebase/`. The old `/gsd-intel query` verb was replaced by direct reads (Serena's `read_file` or grep) because LLM-level question-answering over a few Markdown files turned out to be cheaper than dispatching a query agent.
 
 ## Knowledge graphs
 
 Two complementary graph tools — different scopes.
 
-### `/gsd:graphify` — project knowledge graph
+### `/gsd-graphify` — project knowledge graph
 
 Builds, queries, and inspects the project's knowledge graph stored in `.planning/graphs/`. The graph captures relationships between components, requirements, decisions, and artifacts — enabling structural queries like "what phases depend on the auth subsystem?"
 
@@ -78,7 +78,7 @@ General-purpose: any input (code, docs, papers, images) → knowledge graph → 
 
 **Best for:** one-off knowledge-structuring work; converting research notes into a navigable graph; exploratory analysis of an external corpus.
 
-The two don't overlap: `/gsd:graphify` is scoped to the current GSD-managed project; `/graphify` is a standalone tool for arbitrary input.
+The two don't overlap: `/gsd-graphify` is scoped to the current GSD-managed project; `/graphify` is a standalone tool for arbitrary input.
 
 ## Serena symbol navigation — the "point of contact" layer
 

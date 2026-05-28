@@ -35,7 +35,7 @@ Common problems and how to fix them.
 **Fixes:**
 
 1. **Compact early** — Run `/compact` at 50%, don't wait for auto-compact at 80%
-2. **Clear between tasks** — `/gsd:pause-work` → `/clear` → `/gsd:resume-work`
+2. **Clear between tasks** — `/gsd-pause-work` → `/clear` → `/gsd-resume-work`
 3. **Disable idle MCP servers** — Each server's tool definitions consume context even when not used
 4. **Use `/sc:index-repo`** — 3K tokens vs 58K to understand your codebase
 5. **Use subagents** — Say "use subagents" to offload research to isolated contexts
@@ -53,24 +53,24 @@ Common problems and how to fix them.
 
 ## GSD Agents Fail or Produce Poor Output
 
-**Symptom:** `/gsd:execute-phase` produces incomplete or incorrect code.
+**Symptom:** `/gsd-execute-phase` produces incomplete or incorrect code.
 
 **Fixes:**
 
-1. **Wrong model profile** — Check and change with `/gsd:settings` or the broader `/gsd:config`. Pick `quality` for critical work:
+1. **Wrong model profile** — Check and change with `/gsd-settings` or the broader `/gsd-config`. Pick `quality` for critical work:
    ```
-   /gsd:settings                # Interactive: workflow toggles + model profile
-   /gsd:config                  # Broader: also covers integrations and advanced knobs
+   /gsd-settings                # Interactive: workflow toggles + model profile
+   /gsd-config                  # Broader: also covers integrations and advanced knobs
    ```
    Profile semantics: `quality` (Opus everywhere) · `balanced` (Opus planning, Sonnet execution — default) · `budget` (Sonnet/Haiku) · `inherit` (use parent model).
 
-2. **Missing context** — Did you skip `/gsd:discuss-phase`? The planner needs your vision.
+2. **Missing context** — Did you skip `/gsd-discuss-phase`? The planner needs your vision.
 
 3. **Plan wasn't reviewed** — Run `/sc:spec-panel` on the plan BEFORE executing. Bad plans produce bad code.
 
 4. **Context bloat** — Run `/clear` between planning and execution. Planning tokens degrade execution quality.
 
-5. **Stale codebase knowledge** — Run `/gsd:map-codebase` to refresh. Architecture may have shifted since last map.
+5. **Stale codebase knowledge** — Run `/gsd-map-codebase` to refresh. Architecture may have shifted since last map.
 
 ---
 
@@ -176,7 +176,7 @@ Commit this file so your whole team benefits. Use `settings.local.json` for pers
 
 ---
 
-## `/gsd:spec-phase` Ambiguity Score Is High
+## `/gsd-spec-phase` Ambiguity Score Is High
 
 **Symptom:** `spec-phase` reports ambiguity ≥ 5/10 and you're not sure how to lower it.
 
@@ -188,35 +188,35 @@ Commit this file so your whole team benefits. Use `settings.local.json` for pers
 
 3. **Accept and move on** — some ambiguity is inherent; rather than fighting it, write it as an explicit open question in `SPEC.md` and resolve in `discuss-phase`.
 
-4. **Break the phase** — a phase with high ambiguity across 4+ requirements is often two phases that got conflated. Use `/gsd:phase` (consolidated CRUD: add / insert / remove / edit) to split, or `/gsd:mvp-phase` to vertically slice the current phase into an MVP plus follow-ups.
+4. **Break the phase** — a phase with high ambiguity across 4+ requirements is often two phases that got conflated. Use `/gsd-phase` (consolidated CRUD: add / insert / remove / edit) to split, or `/gsd-mvp-phase` to vertically slice the current phase into an MVP plus follow-ups.
 
 ---
 
-## `/gsd:thread` — State Collisions
+## `/gsd-thread` — State Collisions
 
 **Symptom:** Two threads active, switching between them produces weird context bleed.
 
 **Fixes:**
 
-1. **`/gsd:thread list`** — see all open threads. Archive any that are stale.
+1. **`/gsd-thread list`** — see all open threads. Archive any that are stale.
 
-2. **`/gsd:thread switch` is not a merge** — threads are parallel containers; you can't merge them automatically.
+2. **`/gsd-thread switch` is not a merge** — threads are parallel containers; you can't merge them automatically.
 
-3. **Serialize** — if two threads conflict over the same code area, pause one (`/gsd:thread archive`) and resume later.
+3. **Serialize** — if two threads conflict over the same code area, pause one (`/gsd-thread archive`) and resume later.
 
 ---
 
-## `/gsd:workstreams` — Confused State
+## `/gsd-workstreams` — Confused State
 
-**Symptom:** `/gsd:workstreams status` reports inconsistencies or phases assigned to multiple workstreams.
+**Symptom:** `/gsd-workstreams status` reports inconsistencies or phases assigned to multiple workstreams.
 
 **Fixes:**
 
-1. **`/gsd:workstreams status`** — the diagnostic output will flag orphaned or duplicated phases.
+1. **`/gsd-workstreams status`** — the diagnostic output will flag orphaned or duplicated phases.
 
-2. **`/gsd:forensics`** — if the history is complex, run forensics against `.planning/` for a post-mortem.
+2. **`/gsd-forensics`** — if the history is complex, run forensics against `.planning/` for a post-mortem.
 
-3. **`/gsd:health`** — diagnoses and can auto-repair common `.planning/` issues.
+3. **`/gsd-health`** — diagnoses and can auto-repair common `.planning/` issues.
 
 ---
 
@@ -238,13 +238,13 @@ Commit this file so your whole team benefits. Use `settings.local.json` for pers
 
 ## GSD State Is Corrupted
 
-**Symptom:** `/gsd:progress` shows wrong state, or GSD commands error out.
+**Symptom:** `/gsd-progress` shows wrong state, or GSD commands error out.
 
 **Fixes:**
 
 1. **Run health check:**
    ```
-   /gsd:health
+   /gsd-health
    ```
    This diagnoses `.planning/` directory issues and can auto-repair.
 
@@ -252,7 +252,7 @@ Commit this file so your whole team benefits. Use `settings.local.json` for pers
 
 3. **Re-map if needed:**
    ```
-   /gsd:map-codebase
+   /gsd-map-codebase
    ```
    Rebuilds codebase analysis from scratch.
 
@@ -265,18 +265,18 @@ Commit this file so your whole team benefits. Use `settings.local.json` for pers
 **Fix:** Start with just the Golden Path:
 
 ```bash
-/gsd:progress                    # Where am I?
-/gsd:discuss-phase N             # Talk about what to build
-/gsd:plan-phase N                # Make a plan
-/gsd:execute-phase N             # Build it
-/gsd:verify-work N               # Check it works
+/gsd-progress                    # Where am I?
+/gsd-discuss-phase N             # Talk about what to build
+/gsd-plan-phase N                # Make a plan
+/gsd-execute-phase N             # Build it
+/gsd-verify-work N               # Check it works
 ```
 
 That's 5 commands. Everything else is optional enhancement. See the [Stack Profiles](00-getting-started.md) for a gradual adoption path.
 
 Or use the routing commands:
 ```bash
-/gsd:progress "what you want to do"  # Unified situational command: routes freeform intent
+/gsd-progress "what you want to do"  # Unified situational command: routes freeform intent
 /sc:recommend "what you want"         # SC recommends the best approach
 ```
 

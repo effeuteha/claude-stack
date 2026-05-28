@@ -14,8 +14,16 @@ Best for: Solo developers, small projects, getting started with AI-assisted deve
 |------|---------|---------|
 | **Claude Code** | Core AI agent | `npm install -g @anthropic-ai/claude-code` |
 | **Superpowers** | Discipline (TDD, brainstorm, verify) | [github.com/obra/superpowers](https://github.com/obra/superpowers) |
-| **GSD** | Project lifecycle | [github.com/gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) |
+| **GSD** | Project lifecycle | [github.com/open-gsd/get-shit-done-redux](https://github.com/open-gsd/get-shit-done-redux) |
 | **Context7 MCP** | Library docs | Add to `.mcp.json` (see below) |
+
+> ⚠️ **Don't install the original `get-shit-done`.** Upstream changed hands, and the original npm package (`get-shit-done-cc`) is no longer the maintained line. Use the community fork — **`get-shit-done-redux`**:
+>
+> ```bash
+> npx @opengsd/get-shit-done-redux@latest
+> ```
+>
+> What changed & why: **[open-gsd/get-shit-done-redux](https://github.com/open-gsd/get-shit-done-redux)**
 
 ### Setup
 
@@ -24,7 +32,7 @@ Best for: Solo developers, small projects, getting started with AI-assisted deve
 npm install -g @anthropic-ai/claude-code
 
 # 2. Install GSD (follow repo instructions)
-# https://github.com/gsd-build/get-shit-done
+# https://github.com/open-gsd/get-shit-done-redux
 
 # 3. Create MCP config
 cat > .mcp.json << 'EOF'
@@ -45,13 +53,13 @@ EOF
 ### What You Can Do
 
 ```bash
-/gsd:new-project                    # Initialize project
-/gsd:discuss-phase N                # Plan a phase
-/gsd:plan-phase N                   # Create detailed plan
-/gsd:execute-phase N                # Build it
-/gsd:verify-work N                  # Verify it works
-/gsd:quick                          # Quick one-off tasks
-/gsd:debug "issue"                  # Debug with persistent state
+/gsd-new-project                    # Initialize project
+/gsd-discuss-phase N                # Plan a phase
+/gsd-plan-phase N                   # Create detailed plan
+/gsd-execute-phase N                # Build it
+/gsd-verify-work N                  # Verify it works
+/gsd-quick                          # Quick one-off tasks
+/gsd-debug "issue"                  # Debug with persistent state
 ```
 
 ### When to Upgrade
@@ -72,14 +80,14 @@ Everything in Minimal, plus:
 
 | Tool | Purpose | Install |
 |------|---------|---------|
-| **SuperClaude** | Strategic thinking | [github.com/NomenAK/SuperClaude](https://github.com/NomenAK/SuperClaude) |
+| **SuperClaude** | Strategic thinking | [github.com/SuperClaude-Org/SuperClaude_Framework](https://github.com/SuperClaude-Org/SuperClaude_Framework) |
 | **Serena MCP** | Code intelligence | [github.com/oraios/serena](https://github.com/oraios/serena) |
 
 ### Additional Setup
 
 ```bash
 # 1. Install SuperClaude (follow repo instructions)
-# https://github.com/NomenAK/SuperClaude
+# https://github.com/SuperClaude-Org/SuperClaude_Framework
 
 # 2. Install Superpowers (follow repo instructions)
 # https://github.com/obra/superpowers
@@ -97,7 +105,7 @@ cat > .mcp.json << 'EOF'
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@anthropic/sequential-thinking-mcp"]
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     }
   }
 }
@@ -196,7 +204,7 @@ Best for: Developers who prefer GUI over CLI, teams using VSCode as primary IDE.
 |------|---------|---------|
 | **Mysti** | Primary interface | `ext install DeepMyst.mysti` |
 | **Claude Code** | Backend (spawned by Mysti) | `npm install -g @anthropic-ai/claude-code` |
-| **GSD** | Lifecycle (via Claude Code) | [github.com/gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) |
+| **GSD** | Lifecycle (via Claude Code) | [github.com/open-gsd/get-shit-done-redux](https://github.com/open-gsd/get-shit-done-redux) |
 | **Context7 MCP** | Library docs | Add to `.mcp.json` |
 | **Serena MCP** | Code intelligence | Configure in MCP settings |
 
@@ -211,7 +219,7 @@ Your CLAUDE.md, GSD state, and MCP servers are inherited automatically when Myst
 
 ### When to Drop to Terminal
 
-- Complex multi-phase execution (`/gsd:autonomous`)
+- Complex multi-phase execution (`/gsd-autonomous`)
 - Headless/SSH environments
 - Sessions that need to persist across multiple days
 - Heavy GSD lifecycle management
@@ -236,7 +244,7 @@ Week 3: + Serena + Context7
 Week 4: + Workflow plugins (feature-dev, frontend-design, code-review)
   Specialized commands for specific task shapes
 
-Week 5: + Mysti + /gsd:review (cross-AI)
+Week 5: + Mysti + /gsd-review (cross-AI)
   Multi-model brainstorming and cross-AI plan review
   Architecture debates across providers
 ```

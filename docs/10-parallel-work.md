@@ -15,15 +15,15 @@ Parallelism costs attention. Every mechanism below adds a dimension (a second ch
 
 ### 2. GSD workstreams (planning-level isolation)
 
-- **What it isolates:** independent phase lineages. `/gsd:workstreams` tracks multiple parallel planning tracks within one project.
+- **What it isolates:** independent phase lineages. `/gsd-workstreams` tracks multiple parallel planning tracks within one project.
 - **Cost:** cognitive — you're shepherding multiple workstreams at once.
 - **Use for:** larger projects with teams, or solo work juggling unrelated feature areas concurrently.
-- **Commands:** `/gsd:workstreams list|create|switch|status|progress|complete|resume`.
-- **Optional pairing:** `/gsd:workspace` creates and manages isolated workspaces with repo copies and an independent `.planning/` — use this when even the planning artifacts shouldn't mingle.
+- **Commands:** `/gsd-workstreams list|create|switch|status|progress|complete|resume`.
+- **Optional pairing:** `/gsd-workspace` creates and manages isolated workspaces with repo copies and an independent `.planning/` — use this when even the planning artifacts shouldn't mingle.
 
 ### 3. GSD threads (persistent conversational context)
 
-- **What it isolates:** conversational context. `/gsd:thread` saves a context thread you can resume later — potentially in a fresh session, potentially weeks out.
+- **What it isolates:** conversational context. `/gsd-thread` saves a context thread you can resume later — potentially in a fresh session, potentially weeks out.
 - **Cost:** you must name threads and remember they exist.
 - **Use for:** long-running investigations, cross-session work, switching between active threads without losing state.
 
@@ -50,11 +50,11 @@ Need parallelism in WHAT dimension?
     -> Git worktrees.
 
   Planning (multiple phases in flight)?
-    -> /gsd:workstreams (same repo)
-    -> /gsd:workspace (isolated copy + independent .planning/)
+    -> /gsd-workstreams (same repo)
+    -> /gsd-workspace (isolated copy + independent .planning/)
 
   Conversation (context that outlives a session)?
-    -> /gsd:thread
+    -> /gsd-thread
 
   Execution of one plan?
     -> subagent-driven-development (per-task subagents, review gates)
@@ -76,7 +76,7 @@ The rule of thumb: *if the two pieces share anything — a file, a data model, a
 
 - [02 Discipline Layer](02-discipline-layer.md) — `using-git-worktrees`, `subagent-driven-development`, `dispatching-parallel-agents` as skills.
 - [06 Workflow Phases](06-workflow-phases.md) — how workstreams and threads interact with the GSD lifecycle.
-- [12 Session Management](12-session-management.md) — `remember` and `/gsd:thread` for cross-session continuity.
+- [12 Session Management](12-session-management.md) — `remember` and `/gsd-thread` for cross-session continuity.
 
 ---
 

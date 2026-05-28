@@ -112,19 +112,19 @@ Claude Code, Copilot CLI, Gemini, Codex, Cline, Cursor, OpenClaw, OpenCode, Qwen
 2. Select Brainstorm -> Debate strategy
 3. @claude + @gemini (or @codex)
 4. Paste your phase context
-5. Let agents debate, then feed consensus into /gsd:spec-phase or /gsd:discuss-phase
+5. Let agents debate, then feed consensus into /gsd-spec-phase or /gsd-discuss-phase
 ```
 
 ### Cross-model plan review (Phase 3.5)
 ```
-1. Finish /gsd:plan-phase N in terminal
+1. Finish /gsd-plan-phase N in terminal
 2. In Mysti Brainstorm -> Red-Team:
    - @claude (Defender) + @gemini (Challenger)
 3. Paste PLAN.md
-4. Feed findings back into the plan OR use /gsd:review for CLI-based cross-AI review
+4. Feed findings back into the plan OR use /gsd-review for CLI-based cross-AI review
 ```
 
-See [07 Quality Scaling](07-quality-scaling.md) — Mysti Red-Team is a GUI alternative to `/gsd:review`, but `/gsd:review` is CLI-native and integrates with the GSD lifecycle.
+See [07 Quality Scaling](07-quality-scaling.md) — Mysti Red-Team is a GUI alternative to `/gsd-review`, but `/gsd-review` is CLI-native and integrates with the GSD lifecycle.
 
 ### Security reviews (Phase 5 Analyze)
 ```
@@ -139,7 +139,7 @@ See [07 Quality Scaling](07-quality-scaling.md) — Mysti Red-Team is a GUI alte
 1. Mysti Brainstorm -> Perspectives
 2. @claude (Risk Analyst) + @codex (Innovator)
 3. Evaluate tradeoffs
-4. Feed into /gsd:new-milestone scope or /gsd:spec-phase
+4. Feed into /gsd-new-milestone scope or /gsd-spec-phase
 ```
 
 ### Code review (Phase 5 Analyze)

@@ -24,8 +24,8 @@ Context management is the difference between Claude producing great output and p
 |-----------|--------|-----|
 | Context at ~50% | Run `/compact` manually | Don't wait for auto-compact at 80% — quality degrades before that |
 | Switching to a new task | Run `/clear` | Fresh context > bloated context |
-| About to `/clear` | Run `/gsd:pause-work` + `/sc:save` first | Snapshot state before wiping |
-| Complex planning done, ready to execute | `/clear` then `/gsd:resume-work` | Planning tokens bloat execution quality |
+| About to `/clear` | Run `/gsd-pause-work` + `/sc:save` first | Snapshot state before wiping |
+| Complex planning done, ready to execute | `/clear` then `/gsd-resume-work` | Planning tokens bloat execution quality |
 | Claude going off-track | `Esc Esc` or `/rewind` | Undo bad turns instead of arguing in degraded context |
 | Need to check context health | `/context` | Shows usage breakdown |
 | Need to check token spend | `/cost` | Shows session cost |
@@ -88,13 +88,13 @@ START SESSION
 [More work]                               ~60% used
     |
     v
-[/gsd:pause-work + /sc:save]             state saved
+[/gsd-pause-work + /sc:save]             state saved
     |
     v
 [/clear]                                  ~20% used (fresh)
     |
     v
-[/gsd:resume-work]                        full context restored
+[/gsd-resume-work]                        full context restored
     |
     v
 [Continue work with clean context]
@@ -105,7 +105,7 @@ START SESSION
 | Mistake | Impact | Fix |
 |---------|--------|-----|
 | Never compacting | Quality degrades silently | `/compact` at 50% |
-| `/clear` without saving state | Lose work-in-progress | Always `/gsd:pause-work` first |
+| `/clear` without saving state | Lose work-in-progress | Always `/gsd-pause-work` first |
 | Keeping Playwright/HuggingFace enabled when not using them | Wastes 5-15% of context on idle tool definitions | Disable, enable on demand |
 | Arguing with Claude when it's confused | Burns tokens in polluted context | `Esc Esc`, re-prompt cleanly |
 | Reading entire files when you need one function | Wastes context on irrelevant code | Use Serena `find_symbol` |

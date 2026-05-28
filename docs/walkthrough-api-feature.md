@@ -13,7 +13,7 @@ This walkthrough shows the complete lifecycle of building a real feature using t
 claude
 
 # Check where we are
-/gsd:progress
+/gsd-progress
 ```
 
 GSD reports: Milestone v1.2 in progress, Phase 3 (User Preferences API) is next.
@@ -30,7 +30,7 @@ This creates a 3KB project index instead of reading 58K tokens of source code.
 ## Step 1: Spec the Phase — Lock WHAT (5 minutes)
 
 ```bash
-/gsd:spec-phase 3
+/gsd-spec-phase 3
 ```
 
 `spec-phase` produces `SPEC.md` with falsifiable requirements and an **ambiguity score**. For this phase the first pass returns:
@@ -58,7 +58,7 @@ You answer the open questions: **PATCH** for partial updates, **hardcoded defaul
 ## Step 2: Discuss — Gray-Area Implementation Decisions (5 minutes)
 
 ```bash
-/gsd:discuss-phase 3
+/gsd-discuss-phase 3
 ```
 
 Now the requirements are locked, we discuss *how*. GSD asks:
@@ -79,7 +79,7 @@ GSD writes `DISCUSS.md`.
 ## Step 3: Plan (5 minutes)
 
 ```bash
-/gsd:plan-phase 3
+/gsd-plan-phase 3
 ```
 
 GSD spawns researcher + planner + plan-checker agents. After ~2 minutes, it produces:
@@ -101,7 +101,7 @@ Verification: All tests pass, manual curl test of both endpoints, ambiguity scor
 
 ---
 
-## Step 4: Review the Plan — `/sc:spec-panel` + `/gsd:review` (3 minutes)
+## Step 4: Review the Plan — `/sc:spec-panel` + `/gsd-review` (3 minutes)
 
 ```bash
 /sc:spec-panel .planning/phases/03-user-preferences/PLAN.md --mode critique
@@ -117,7 +117,7 @@ Multi-expert panel (inside Claude):
 
 You update the plan: explicit defaults, version-migration note, malformed-JSON test.
 
-**This phase is fairly low-stakes, so we skip `/gsd:review`.** For a security-sensitive or AI-integration phase, we'd run `/gsd:review` (cross-AI) in addition to `spec-panel`.
+**This phase is fairly low-stakes, so we skip `/gsd-review`.** For a security-sensitive or AI-integration phase, we'd run `/gsd-review` (cross-AI) in addition to `spec-panel`.
 
 ---
 
@@ -125,12 +125,12 @@ You update the plan: explicit defaults, version-migration note, malformed-JSON t
 
 ```bash
 # Clear context from planning — fresh start for execution
-/gsd:pause-work
+/gsd-pause-work
 /clear
-/gsd:resume-work
+/gsd-resume-work
 
 # Execute the plan
-/gsd:execute-phase 3
+/gsd-execute-phase 3
 ```
 
 The executor agent:
@@ -171,7 +171,7 @@ You add rate limiting — 60 req/min per user. Commit.
 All 7 tests pass. Coverage: 94% on new code.
 
 ```bash
-/gsd:verify-work 3                         # UAT
+/gsd-verify-work 3                         # UAT
 ```
 
 GSD extracts deliverables from `SPEC.md` and asks:
@@ -190,7 +190,7 @@ All verified. Phase marked complete.
 ## Step 8: Ship (2 minutes)
 
 ```bash
-/gsd:ship
+/gsd-ship
 ```
 
 `ship` creates the PR, runs code review, prepares the commit chain for merge. Review passes. PR is ready.
@@ -202,15 +202,15 @@ All verified. Phase marked complete.
 | Problem | Recovery |
 |---|---|
 | **Ambiguity score stays high in `spec-phase`** | Re-state requirements until the score drops, or acknowledge explicit open questions in `SPEC.md` and move to `discuss-phase`. High ambiguity is a signal, not a failure. |
-| **Execution fails mid-phase** | Fix the issue, then re-run `/gsd:execute-phase N` — it picks up where it left off via `.planning/` state. |
-| **Tests fail after execution** | `/gsd:debug "test failure description"` for persistent debugging (survives `/clear`), or fix manually and re-run `/gsd:verify-work N`. |
-| **Spec-panel or `/gsd:review` found major issues** | Update the plan: re-run `/gsd:plan-phase N` with feedback, then execute again. |
-| **Workflow collapsed; need post-mortem** | `/gsd:forensics` analyzes git history + `.planning/` artifacts + state to diagnose. |
-| **Autonomous follow-up quality work** | `/gsd:audit-fix` for an audit → classify → fix → test → commit cycle. |
-| **Need to roll back the phase** | `/gsd:undo` — safe git revert using the phase manifest with dependency checks. |
-| **Context got bloated** | `/gsd:pause-work` → `/clear` → `/gsd:resume-work` — resume with clean context. |
-| **Pausing for the day** | `/gsd:pause-work` leaves a handoff; `/gsd:resume-work` picks up tomorrow. For a named parallel thread: `/gsd:thread`. |
-| **Wrong approach entirely** | Re-run `/gsd:spec-phase N` with updated vision — starts over with a new SPEC; old artifacts archive. |
+| **Execution fails mid-phase** | Fix the issue, then re-run `/gsd-execute-phase N` — it picks up where it left off via `.planning/` state. |
+| **Tests fail after execution** | `/gsd-debug "test failure description"` for persistent debugging (survives `/clear`), or fix manually and re-run `/gsd-verify-work N`. |
+| **Spec-panel or `/gsd-review` found major issues** | Update the plan: re-run `/gsd-plan-phase N` with feedback, then execute again. |
+| **Workflow collapsed; need post-mortem** | `/gsd-forensics` analyzes git history + `.planning/` artifacts + state to diagnose. |
+| **Autonomous follow-up quality work** | `/gsd-audit-fix` for an audit → classify → fix → test → commit cycle. |
+| **Need to roll back the phase** | `/gsd-undo` — safe git revert using the phase manifest with dependency checks. |
+| **Context got bloated** | `/gsd-pause-work` → `/clear` → `/gsd-resume-work` — resume with clean context. |
+| **Pausing for the day** | `/gsd-pause-work` leaves a handoff; `/gsd-resume-work` picks up tomorrow. For a named parallel thread: `/gsd-thread`. |
+| **Wrong approach entirely** | Re-run `/gsd-spec-phase N` with updated vision — starts over with a new SPEC; old artifacts archive. |
 
 The workflow is **not a one-way conveyor belt**. You can loop back to any earlier phase at any time. `.planning/` tracks where you are.
 
@@ -222,9 +222,9 @@ The workflow is **not a one-way conveyor belt**. You can loop back to any earlie
 |---|---|
 | Jump straight to coding | Spec → discuss → plan → review → execute → verify → ship |
 | Claude guesses at patterns | Serena finds actual codebase patterns |
-| No plan review | `/sc:spec-panel` catches 3 issues before coding; `/gsd:review` for cross-AI on high-stakes |
+| No plan review | `/sc:spec-panel` catches 3 issues before coding; `/gsd-review` for cross-AI on high-stakes |
 | Context bloat from planning + coding | `/clear` between planning and execution |
-| "Does it work?" — manual checking | `/gsd:verify-work` with structured UAT goal-backward from SPEC |
+| "Does it work?" — manual checking | `/gsd-verify-work` with structured UAT goal-backward from SPEC |
 | No traceability | Full audit trail in `.planning/` |
 | Knowledge lost between sessions | Serena memories + GSD state + `remember` plugin persist |
 
@@ -238,15 +238,15 @@ The workflow is **not a one-way conveyor belt**. You can loop back to any earlie
 
 1. **Spec before discuss** — `spec-phase` locks WHAT; `discuss-phase` handles HOW. Mixing them smuggles implementation decisions into requirements.
 2. **Ambiguity score is a signal** — high score ≠ failure; it's feedback that requirements aren't stable enough to plan yet.
-3. **Review the plan** — `/sc:spec-panel` is one of the highest-ROI steps. For high-stakes phases, add `/gsd:review` for cross-AI review.
+3. **Review the plan** — `/sc:spec-panel` is one of the highest-ROI steps. For high-stakes phases, add `/gsd-review` for cross-AI review.
 4. **Clear context between phases** — planning tokens degrade execution quality.
 5. **Let Serena find patterns** — don't guess at codebase conventions, look them up.
 6. **Use Context7 for library docs** — faster and more accurate than Claude's training data.
-7. **`/gsd:ship` replaces ad-hoc PR creation** — the phase has a clean handoff built in.
+7. **`/gsd-ship` replaces ad-hoc PR creation** — the phase has a clean handoff built in.
 
 ---
 
 **See also:**
 - [02 Discipline Layer](02-discipline-layer.md) — the Superpowers commitments wrapping every step above
 - [06 Workflow Phases](06-workflow-phases.md) — the full lifecycle with new phase types (ai-integration, ui, sketch, spike)
-- [07 Quality Scaling](07-quality-scaling.md) — review tools including `/gsd:review` cross-AI peer review
+- [07 Quality Scaling](07-quality-scaling.md) — review tools including `/gsd-review` cross-AI peer review
