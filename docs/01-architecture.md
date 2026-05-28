@@ -18,7 +18,7 @@ Superpowers is a plugin, but it behaves more like a set of commitments: brainsto
 
 ### Lifecycle — GSD (shepherding the work)
 
-GSD (`/gsd:*`) runs the lifecycle: spec → discuss → plan → execute → verify → ship. Plus workstreams and threads for parallel work, and specialized phase types (`/gsd:ai-integration-phase`, `/gsd:ui-phase`, `/gsd:sketch`, `/gsd:spike`) for shapes that need extra rigor or extra permission to fail. GSD turns strategic direction into committed, reviewable artifacts under `.planning/`.
+GSD (`/gsd-*`) runs the lifecycle: spec → discuss → plan → execute → verify → ship. Plus workstreams and threads for parallel work, and specialized phase types (`/gsd-ai-integration-phase`, `/gsd-ui-phase`, `/gsd-sketch`, `/gsd-spike`) for shapes that need extra rigor or extra permission to fail. GSD turns strategic direction into committed, reviewable artifacts under `.planning/`.
 
 ### Code — Serena + Context7 (manipulating the code)
 
@@ -46,7 +46,7 @@ The flow: strategic tools produce a spec; the spec flows into the lifecycle laye
 |---|---|---|
 | Superpowers | Discipline | methodology skills (brainstorm, TDD, verify, debug, worktrees, subagents, plans) |
 | SuperClaude (`/sc:*`) | Strategic | research, design, analyze, spec-panel, business-panel |
-| GSD (`/gsd:*`) | Lifecycle | spec, plan, execute, verify, ship, workstreams, threads, forensics, audit-fix |
+| GSD (`/gsd-*`) | Lifecycle | spec, plan, execute, verify, ship, workstreams, threads, forensics, audit-fix |
 | Serena MCP | Code | symbol-level code navigation, memories |
 | Context7 MCP | Code | live library documentation |
 | Playwright MCP | Code (browser) | browser automation for web-UI workflows |
@@ -78,7 +78,7 @@ When you use GSD, it materializes a `.planning/` directory:
 |-- config.json           # Workflow mode (interactive/yolo)
 |-- research/             # Domain research artifacts
 |-- codebase/             # Map artifacts (parallel mapper agents)
-|-- graphs/               # /gsd:graphify knowledge graphs
+|-- graphs/               # /gsd-graphify knowledge graphs
 +-- phases/               # Phase plans, specs, verification records, session reports
 ```
 

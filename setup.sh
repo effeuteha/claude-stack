@@ -205,7 +205,7 @@ MCP
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@anthropic/sequential-thinking-mcp"]
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     }
   }
 }
@@ -222,7 +222,7 @@ MCP
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@anthropic/sequential-thinking-mcp"]
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     },
     "playwright": {
       "command": "npx",
@@ -312,13 +312,14 @@ if [ "$CLAUDE_OK" = false ]; then
 fi
 
 if [ "$GSD_OK" = false ]; then
-    echo -e "  ${YELLOW}2.${NC} Install GSD: ${CYAN}https://github.com/gsd-build/get-shit-done${NC}"
+    echo -e "  ${YELLOW}2.${NC} Install GSD ${BOLD}(community fork — not the original)${NC}: ${CYAN}npx @opengsd/get-shit-done-redux@latest${NC}"
+    echo -e "     ${YELLOW}⚠${NC}  The original ${CYAN}get-shit-done-cc${NC} is no longer maintained — use the fork above. Details: ${CYAN}https://github.com/open-gsd/get-shit-done-redux${NC}"
 fi
 
 echo -e "  ${YELLOW}•${NC} Install Superpowers: ${CYAN}https://github.com/obra/superpowers${NC} (Core tier — recommended for all profiles)"
 
 if [ "$PROFILE_NAME" = "standard" ] || [ "$PROFILE_NAME" = "full" ]; then
-    echo -e "  ${YELLOW}•${NC} Install SuperClaude: ${CYAN}https://github.com/NomenAK/SuperClaude${NC}"
+    echo -e "  ${YELLOW}•${NC} Install SuperClaude: ${CYAN}https://github.com/SuperClaude-Org/SuperClaude_Framework${NC}"
     echo -e "  ${YELLOW}•${NC} Configure Serena: ${CYAN}https://github.com/oraios/serena${NC}"
 fi
 
@@ -332,5 +333,5 @@ echo -e "  ${YELLOW}→${NC} Customize ${BOLD}CLAUDE.md${NC} for your project"
 echo -e "  ${YELLOW}→${NC} Review ${BOLD}.claude/settings.json${NC} permissions"
 echo -e "  ${YELLOW}→${NC} Read the guide: ${CYAN}https://github.com/effeuteha/claude-stack${NC}"
 echo ""
-echo -e "${GREEN}${BOLD}Setup complete!${NC} Start Claude Code and run ${CYAN}/gsd:progress${NC} to begin."
+echo -e "${GREEN}${BOLD}Setup complete!${NC} Start Claude Code and run ${CYAN}/gsd-progress${NC} to begin."
 echo ""

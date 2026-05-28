@@ -25,7 +25,7 @@ Each entry carries: *what it is* · *one-line value* · *when to use* · *comman
 - **What it is:** Project lifecycle management — spec → discuss → plan → execute → verify → ship.
 - **Value:** Turns vague requests into atomic, committed artifacts with a traceable history.
 - **When:** Any non-trivial feature or phase.
-- **Commands (~85):** `/gsd:progress` (situational dispatcher), `/gsd:spec-phase`, `/gsd:discuss-phase`, `/gsd:plan-phase`, `/gsd:execute-phase`, `/gsd:verify-work`, `/gsd:ship`, `/gsd:autonomous`, `/gsd:quick`, `/gsd:fast`, `/gsd:debug`, `/gsd:forensics`, `/gsd:audit-fix`, `/gsd:ai-integration-phase`, `/gsd:ui-phase`, `/gsd:mvp-phase`, `/gsd:sketch`, `/gsd:spike`, `/gsd:phase` (CRUD), `/gsd:capture`, `/gsd:explore`, `/gsd:workstreams`, `/gsd:workspace`, `/gsd:thread`, `/gsd:review`, `/gsd:plan-review-convergence`, `/gsd:code-review` (`--fix`), `/gsd:secure-phase`, `/gsd:audit-uat`, `/gsd:eval-review`, `/gsd:map-codebase`, `/gsd:graphify`, `/gsd:ns-context`, `/gsd:docs-update`, `/gsd:extract-learnings`, `/gsd:milestone-summary`, `/gsd:import`, `/gsd:manager`, `/gsd:pr-branch`, `/gsd:pause-work`, `/gsd:resume-work`, `/gsd:stats`, `/gsd:health`, `/gsd:config`, `/gsd:settings`, `/gsd:surface`, `/gsd:help`, … (full list: `/gsd:help`)
+- **Commands (~85):** `/gsd-progress` (situational dispatcher), `/gsd-spec-phase`, `/gsd-discuss-phase`, `/gsd-plan-phase`, `/gsd-execute-phase`, `/gsd-verify-work`, `/gsd-ship`, `/gsd-autonomous`, `/gsd-quick`, `/gsd-fast`, `/gsd-debug`, `/gsd-forensics`, `/gsd-audit-fix`, `/gsd-ai-integration-phase`, `/gsd-ui-phase`, `/gsd-mvp-phase`, `/gsd-sketch`, `/gsd-spike`, `/gsd-phase` (CRUD), `/gsd-capture`, `/gsd-explore`, `/gsd-workstreams`, `/gsd-workspace`, `/gsd-thread`, `/gsd-review`, `/gsd-plan-review-convergence`, `/gsd-code-review` (`--fix`), `/gsd-secure-phase`, `/gsd-audit-uat`, `/gsd-eval-review`, `/gsd-map-codebase`, `/gsd-graphify`, `/gsd-ns-context`, `/gsd-docs-update`, `/gsd-extract-learnings`, `/gsd-milestone-summary`, `/gsd-import`, `/gsd-manager`, `/gsd-pr-branch`, `/gsd-pause-work`, `/gsd-resume-work`, `/gsd-stats`, `/gsd-health`, `/gsd-config`, `/gsd-settings`, `/gsd-surface`, `/gsd-help`, … (full list: `/gsd-help`)
 - **Pairs with:** Superpowers (discipline wraps every call), SuperClaude (strategy feeds plan).
 
 ### SuperClaude
@@ -65,21 +65,21 @@ Each entry carries: *what it is* · *one-line value* · *when to use* · *comman
 - **Value:** Scaffolds a discovery → architecture → implementation path when the shape of the feature isn't yet clear.
 - **When:** Early-stage feature work; greenfield with ambiguity.
 - **Trigger:** `/feature-dev:feature-dev`.
-- **Pairs with:** `/gsd:spec-phase`, `/gsd:discuss-phase`.
+- **Pairs with:** `/gsd-spec-phase`, `/gsd-discuss-phase`.
 
 ### `frontend-design` plugin
 - **What it is:** Distinctive, production-grade UI component generation.
 - **Value:** Avoids the generic-AI aesthetic — polished, creative frontend code.
 - **When:** Building web components, pages, or applications.
 - **Trigger:** `/frontend-design:frontend-design`.
-- **Pairs with:** `/gsd:ui-phase` (design contract), `/gsd:ui-review` (audit), Playwright MCP (visual verification).
+- **Pairs with:** `/gsd-ui-phase` (design contract), `/gsd-ui-review` (audit), Playwright MCP (visual verification).
 
 ### `code-review` plugin
 - **What it is:** Standalone code-review agent running in a fresh context.
 - **Value:** Independent second-eye review, uncorrelated from the agent that wrote the code.
 - **When:** Before merging any significant change; after a major feature step.
 - **Trigger:** `/code-review:code-review`.
-- **Pairs with:** `/gsd:code-review` (phase-scoped); add `--fix` to auto-apply mechanical findings.
+- **Pairs with:** `/gsd-code-review` (phase-scoped); add `--fix` to auto-apply mechanical findings.
 
 ### `claude-md-management` plugin
 - **What it is:** `CLAUDE.md` audit and improvement skills.
@@ -92,21 +92,21 @@ Each entry carries: *what it is* · *one-line value* · *when to use* · *comman
 - **Value:** Suggests hooks, subagents, skills, plugins, MCP servers based on your codebase.
 - **When:** Initial project setup or mid-project audit.
 - **Trigger:** `/claude-code-setup:claude-automation-recommender`.
-- **Pairs with:** `/gsd:new-project`.
+- **Pairs with:** `/gsd-new-project`.
 
 ### Mysti
 - **What it is:** VSCode extension for multi-model brainstorm.
 - **Value:** Two AI models debate (Debate / Red-Team / Perspectives / Delphi) an architecture decision or security question.
 - **When:** Pre-design, when the decision is irreversible; high-stakes review.
 - **Trigger:** `Ctrl+Shift+M` in VSCode.
-- **Pairs with:** `/sc:spec-panel`, `/gsd:review` (both CLI alternatives to Red-Team).
+- **Pairs with:** `/sc:spec-panel`, `/gsd-review` (both CLI alternatives to Red-Team).
 
 ### Playwright MCP
 - **What it is:** Browser automation via MCP.
 - **Value:** Claude drives a real browser — test flows, fill forms, take screenshots.
 - **When:** Frontend testing, visual verification, UI audits.
 - **Tools:** `browser_navigate`, `browser_snapshot`, `browser_take_screenshot`, `browser_click`, `browser_fill_form`, `browser_evaluate`, … (see MCP config).
-- **Pairs with:** `/gsd:ui-review`, `frontend-design` plugin.
+- **Pairs with:** `/gsd-ui-review`, `frontend-design` plugin.
 
 ### Sequential Thinking MCP
 - **What it is:** Structured multi-step reasoning via MCP.
@@ -120,7 +120,7 @@ Each entry carries: *what it is* · *one-line value* · *when to use* · *comman
 - **When:** Pausing mid-task; session startup.
 - **Trigger:** `/remember`.
 - **Files:** `.remember/now.md`, `today-*.md`, `recent.md`, `archive.md`, `core-memories.md`.
-- **Pairs with:** `/gsd:thread`, `/gsd:resume-work`.
+- **Pairs with:** `/gsd-thread`, `/gsd-resume-work`.
 
 ---
 
@@ -137,7 +137,7 @@ Each entry carries: *what it is* · *one-line value* · *when to use* · *comman
 - **Value:** Convert any input (code, docs, papers, images) into a navigable graph.
 - **When:** Ad-hoc knowledge-structuring work; converting research into a graph.
 - **Trigger:** `/graphify`.
-- **Pairs with:** `/gsd:graphify` (project-graph equivalent scoped to `.planning/`).
+- **Pairs with:** `/gsd-graphify` (project-graph equivalent scoped to `.planning/`).
 
 ### Hugging Face MCP
 - **What it is:** Hugging Face Hub + papers search via MCP.

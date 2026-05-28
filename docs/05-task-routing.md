@@ -10,25 +10,25 @@ Not every task needs the full phase lifecycle. Route tasks to the right workflow
 +-- NEW FEATURE (greenfield)
 |   |
 |   +-- Trivial (< 30 min)?
-|   |   YES --> /gsd:quick or /sc:implement
-|   |   NO  --> /gsd:spec-phase (recommended) --> full lifecycle (Ch 06)
+|   |   YES --> /gsd-quick or /sc:implement
+|   |   NO  --> /gsd-spec-phase (recommended) --> full lifecycle (Ch 06)
 |   |
 |   +-- AI/LLM feature (depends on model behavior)?
-|   |   YES --> /gsd:ai-integration-phase (adds AI-SPEC.md with eval gates)
+|   |   YES --> /gsd-ai-integration-phase (adds AI-SPEC.md with eval gates)
 |   |
 |   +-- Frontend feature (UI component / page)?
-|   |   YES --> /gsd:ui-phase (adds UI-SPEC.md design contract)
+|   |   YES --> /gsd-ui-phase (adds UI-SPEC.md design contract)
 |   |           then /frontend-design:frontend-design for generation
-|   |           then /gsd:ui-review for 6-pillar audit
+|   |           then /gsd-ui-review for 6-pillar audit
 |   |
 |   +-- Need multi-model input?
-|       YES --> Mysti Brainstorm OR /gsd:review (cross-AI peer review)
+|       YES --> Mysti Brainstorm OR /gsd-review (cross-AI peer review)
 |
 +-- ENHANCEMENT (brownfield, extending existing code)
 |   |
 |   +-- Well-understood change?
-|   |   YES --> /gsd:discuss-phase --> /gsd:plan-phase --> /gsd:execute-phase
-|   |   NO  --> /gsd:map-codebase first, then plan
+|   |   YES --> /gsd-discuss-phase --> /gsd-plan-phase --> /gsd-execute-phase
+|   |   NO  --> /gsd-map-codebase first, then plan
 |   |
 |   +-- Touches unfamiliar code?
 |       YES --> Serena find_symbol + get_symbols_overview to understand first
@@ -36,8 +36,8 @@ Not every task needs the full phase lifecycle. Route tasks to the right workflow
 +-- BUG FIX
 |   |
 |   +-- Simple & obvious?
-|   |   YES --> /gsd:fast or just fix it
-|   |   NO  --> /gsd:debug (persistent state, survives /clear)
+|   |   YES --> /gsd-fast or just fix it
+|   |   NO  --> /gsd-debug (persistent state, survives /clear)
 |   |
 |   +-- Complex / multi-system?
 |       YES --> Sequential Thinking + Serena find_referencing_symbols
@@ -48,13 +48,13 @@ Not every task needs the full phase lifecycle. Route tasks to the right workflow
 |   |   YES --> /sc:improve or /sc:cleanup
 |   |
 |   +-- Large scope (cross-cutting)?
-|       YES --> /gsd:map-codebase --> plan phases --> execute
+|       YES --> /gsd-map-codebase --> plan phases --> execute
 |       Consider: git hotspot analysis to prioritize high-churn files
 |
 +-- TECH DEBT / CODE QUALITY
 |   YES --> /sc:analyze --focus [security|performance|quality]
 |           then /sc:improve for fixes
-|           for autonomous cycle: /gsd:audit-fix (audit -> classify -> fix -> test -> commit)
+|           for autonomous cycle: /gsd-audit-fix (audit -> classify -> fix -> test -> commit)
 |
 +-- DOCUMENTATION
 |   YES --> /sc:document (component) or /sc:index (full project)
@@ -66,17 +66,17 @@ Not every task needs the full phase lifecycle. Route tasks to the right workflow
 +-- EXPLORATORY / FEASIBILITY
 |   |
 |   +-- Validate a code approach before committing?
-|   |   YES --> /gsd:spike (throwaway code; findings captured automatically at session end)
+|   |   YES --> /gsd-spike (throwaway code; findings captured automatically at session end)
 |   |
 |   +-- Explore UI variants before ui-phase?
-|       YES --> /gsd:sketch (throwaway HTML mockups; findings captured automatically)
+|       YES --> /gsd-sketch (throwaway HTML mockups; findings captured automatically)
 |
 +-- PARALLEL WORK (2+ features in flight)
-|   YES --> git worktree + /gsd:workstreams (see Ch 10 Parallel Work)
-|           For cross-session context: /gsd:thread
+|   YES --> git worktree + /gsd-workstreams (see Ch 10 Parallel Work)
+|           For cross-session context: /gsd-thread
 |
 +-- LOCK REQUIREMENTS BEFORE IMPLEMENTATION
-    YES --> /gsd:spec-phase N (produces SPEC.md with falsifiable reqs + ambiguity score)
+    YES --> /gsd-spec-phase N (produces SPEC.md with falsifiable reqs + ambiguity score)
 ```
 
 ## Plan review — single-model vs cross-AI
@@ -85,10 +85,10 @@ When reviewing a plan before execute:
 
 ```
 Low-stakes phase                -> /sc:spec-panel (multi-expert in Claude)
-High-stakes / AI / security     -> /sc:spec-panel AND /gsd:review (cross-AI peer review)
+High-stakes / AI / security     -> /sc:spec-panel AND /gsd-review (cross-AI peer review)
 ```
 
-`/sc:spec-panel` shifts persona inside Claude. `/gsd:review` dispatches to external AI CLIs (Gemini, Codex, etc.) — different model provider, different training priors. The two are complementary, not redundant, on high-stakes work.
+`/sc:spec-panel` shifts persona inside Claude. `/gsd-review` dispatches to external AI CLIs (Gemini, Codex, etc.) — different model provider, different training priors. The two are complementary, not redundant, on high-stakes work.
 
 ## Rigor Scaling
 
@@ -96,14 +96,14 @@ Scale your AI quality and review effort based on task criticality:
 
 | Task Criticality | Planning | Execution | Review | Testing |
 |-----------------|----------|-----------|--------|---------|
-| **Spike / config / docs** | Skip or `/gsd:quick` | Direct implementation | None | None |
-| **Standard feature** | `/gsd:spec-phase` + `/gsd:discuss-phase` + `/gsd:plan-phase` | `/gsd:execute-phase` | `/sc:spec-panel` | `/sc:test` |
-| **Critical feature** | Spec + discuss + plan + `/sc:spec-panel` | `/gsd:execute-phase` + careful review | `/code-review:code-review` | `/sc:test` + E2E |
-| **Production core** | Spec + discuss + plan + `/sc:spec-panel` + `/gsd:review` (cross-AI) | `/gsd:execute-phase` with verification | Multi-reviewer + `/gsd:validate-phase` | Full suite + mutation testing |
+| **Spike / config / docs** | Skip or `/gsd-quick` | Direct implementation | None | None |
+| **Standard feature** | `/gsd-spec-phase` + `/gsd-discuss-phase` + `/gsd-plan-phase` | `/gsd-execute-phase` | `/sc:spec-panel` | `/sc:test` |
+| **Critical feature** | Spec + discuss + plan + `/sc:spec-panel` | `/gsd-execute-phase` + careful review | `/code-review:code-review` | `/sc:test` + E2E |
+| **Production core** | Spec + discuss + plan + `/sc:spec-panel` + `/gsd-review` (cross-AI) | `/gsd-execute-phase` with verification | Multi-reviewer + `/gsd-validate-phase` | Full suite + mutation testing |
 
 ### GSD Model Profiles
 
-Match AI quality to task criticality. Profiles are configured interactively via `/gsd:config` (broad — toggles + integrations + model profile) or `/gsd:settings` (narrower — toggles + model profile). The profile semantics:
+Match AI quality to task criticality. Profiles are configured interactively via `/gsd-config` (broad — toggles + integrations + model profile) or `/gsd-settings` (narrower — toggles + model profile). The profile semantics:
 
 ```
 budget      # Sonnet writing, Haiku research (spikes, config)
@@ -112,33 +112,33 @@ quality     # Opus everywhere (critical features)
 inherit     # Use parent model (max consistency)
 ```
 
-`/gsd:surface` is a separate command for *skill cluster* profiles — which GSD skills are surfaced in your menu (not which model runs them).
+`/gsd-surface` is a separate command for *skill cluster* profiles — which GSD skills are surfaced in your menu (not which model runs them).
 
 ## Quick Decision: Which Command?
 
 | I need to... | Use this |
 |-------------|----------|
-| Lock WHAT before HOW | `/gsd:spec-phase N` |
-| Build something small and quick | `/gsd:quick` or `/sc:implement` |
-| Build a single-line fix | `/gsd:fast` |
-| Build a planned feature | `/gsd:execute-phase N` |
-| Build an AI/LLM feature | `/gsd:ai-integration-phase N` |
-| Build a frontend feature | `/gsd:ui-phase N` + `frontend-design` plugin |
-| Build everything hands-free | `/gsd:autonomous` |
-| Explore feasibility before committing | `/gsd:spike` |
-| Explore UI variants | `/gsd:sketch` |
-| Fix a simple bug | `/gsd:fast` or just fix it |
-| Debug a complex bug | `/gsd:debug "description"` |
-| Post-mortem a failed workflow | `/gsd:forensics` |
+| Lock WHAT before HOW | `/gsd-spec-phase N` |
+| Build something small and quick | `/gsd-quick` or `/sc:implement` |
+| Build a single-line fix | `/gsd-fast` |
+| Build a planned feature | `/gsd-execute-phase N` |
+| Build an AI/LLM feature | `/gsd-ai-integration-phase N` |
+| Build a frontend feature | `/gsd-ui-phase N` + `frontend-design` plugin |
+| Build everything hands-free | `/gsd-autonomous` |
+| Explore feasibility before committing | `/gsd-spike` |
+| Explore UI variants | `/gsd-sketch` |
+| Fix a simple bug | `/gsd-fast` or just fix it |
+| Debug a complex bug | `/gsd-debug "description"` |
+| Post-mortem a failed workflow | `/gsd-forensics` |
 | Clean up code | `/sc:cleanup` or `/sc:improve` |
-| Autonomous audit-to-fix | `/gsd:audit-fix` |
+| Autonomous audit-to-fix | `/gsd-audit-fix` |
 | Write docs | `/sc:document "component"` |
 | Research a library | Context7 `query-docs` |
 | Research a domain | `/sc:research "query"` |
 | Review a plan (in-Claude) | `/sc:spec-panel .planning/…` |
-| Review a plan (cross-AI) | `/gsd:review .planning/…` |
-| Ship the phase | `/gsd:ship` |
-| I don't know which command | `/gsd:progress "description"` or `/sc:recommend` |
+| Review a plan (cross-AI) | `/gsd-review .planning/…` |
+| Ship the phase | `/gsd-ship` |
+| I don't know which command | `/gsd-progress "description"` or `/sc:recommend` |
 
 ---
 

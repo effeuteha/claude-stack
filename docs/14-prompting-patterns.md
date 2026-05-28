@@ -9,7 +9,7 @@ The single highest-leverage pattern: before any creative work, invoke the brains
 ```
 /superpowers:brainstorming
 # or, for a phase:
-/gsd:spec-phase N
+/gsd-spec-phase N
 ```
 
 Implementation questions hide requirement ambiguity — brainstorm-first surfaces the ambiguity before it turns into rework.
